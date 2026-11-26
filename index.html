@@ -270,9 +270,95 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
 .timeline b { display: block; font-size: 15px; }
 .timeline small { color: var(--muted); font-size: 13px; }
 .sel { user-select: all; }
-.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: #FFFFFF; padding: 12px 20px; font-size: 14px; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 70; max-width: calc(100% - 32px); text-align: center; }
+.toast { position: fixed; left: 50%; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: #FFFFFF; padding: 12px 20px; font-size: 14px; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 70; max-width: calc(100% - 32px); text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { .col img, .toast { transition: none; } }
+
+/* Shop toolbar: search, filters, sort */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.toolbar .q { flex: 2 1 260px; min-width: 0; position: relative; }
+.toolbar .q svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.toolbar input, .toolbar select { height: 48px; border: 1px solid var(--muted); background: #FFFFFF; font: inherit; font-size: 15px; color: var(--ink); min-width: 0; }
+.toolbar input { width: 100%; padding: 0 12px 0 40px; }
+.toolbar select { flex: 1 1 150px; padding: 0 10px; }
+.toolbar input:focus-visible, .toolbar select:focus-visible, .dlg select:focus-visible, .dlg textarea:focus-visible { outline: 3px solid var(--gold-text); outline-offset: 1px; }
+.result-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 22px; font-size: 14px; color: var(--muted); }
+.no-results { grid-column: 1 / -1; text-align: center; padding: 40px 12px; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.trade-note { background: var(--maroon); color: var(--on-maroon); padding: 10px 14px; font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; align-items: center; margin-bottom: 14px; }
+.trade-note button { border: 0; background: transparent; color: var(--gold); font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; min-height: 32px; }
+.pd-link { border: 0; background: transparent; padding: 0; font: inherit; font-size: 17px; font-weight: 600; line-height: 1.4; color: inherit; text-align: left; cursor: pointer; }
+.pd-link:hover { color: var(--maroon); text-decoration: underline; }
+.card .ph img { cursor: pointer; }
+.stars { color: var(--gold-text); font-size: 14px; letter-spacing: .04em; }
+.stars small { color: var(--muted); letter-spacing: 0; }
+.price s { color: var(--muted); font-size: 14px; }
+.price .ws { color: var(--maroon); }
+/* Product page */
+.dlg.pd { width: min(1040px, calc(100% - 24px)); }
+.pd-grid { display: flex; flex-wrap: wrap; gap: 24px 32px; padding: 20px; }
+.pd-gal { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.pd-main { position: relative; background: var(--sand); }
+.pd-main img { width: 100%; height: clamp(320px, 60vh, 560px); object-fit: cover; display: block; }
+.thumbs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; }
+.thumbs button { flex: 0 0 64px; height: 80px; padding: 0; border: 2px solid transparent; background: var(--sand); cursor: pointer; }
+.thumbs button[aria-pressed="true"] { border-color: var(--maroon); }
+.thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pd-info { flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.pd-info h3.display { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.1; }
+.pd-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.pd-price b { font-size: 26px; }
+.pd-offer { background: var(--sand); padding: 10px 12px; font-size: 14px; }
+.pd-offer b { color: var(--maroon); }
+.pd-sw { display: flex; flex-wrap: wrap; margin-left: -6px; }
+.pd-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.pd-actions .btn { flex: 1 1 200px; }
+.pd-pin { display: flex; gap: 8px; }
+.pd-pin input { flex: 1 1 auto; min-width: 0; }
+.spec { width: 100%; border-collapse: collapse; font-size: 14px; }
+.spec th, .spec td { text-align: left; padding: 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.spec th { width: 38%; color: var(--muted); font-weight: 600; padding-right: 12px; }
+.pd-links { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+.pd-links button { border: 0; background: transparent; padding: 0; font: inherit; color: var(--maroon); text-decoration: underline; cursor: pointer; min-height: 32px; }
+.pd-reviews { border-top: 1px solid var(--line); padding: 18px 20px 24px; display: flex; flex-direction: column; gap: 12px; }
+.pd-reviews h4 { margin: 0; font-family: var(--display); font-size: 24px; color: var(--maroon); }
+.rv { background: #FFFFFF; border: 1px solid var(--line); padding: 12px 14px; font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+.rv b { font-size: 14px; }
+.rv small { color: var(--muted); }
+/* Reviews section */
+.reviews-sum { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-bottom: 22px; }
+.reviews-sum .big { font-family: var(--display); font-size: 48px; font-weight: 700; color: var(--maroon); line-height: 1; }
+.rv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 20px; }
+.rv-card { background: #FFFFFF; border: 1px solid var(--line); padding: 20px; display: flex; flex-direction: column; gap: 10px; margin: 0; }
+.rv-card blockquote { margin: 0; font-family: var(--display); font-size: 21px; line-height: 1.35; }
+.rv-card figcaption { font-size: 14px; color: var(--muted); }
+.rv-card figcaption b { color: var(--ink); }
+/* Checkout */
+.dlg.co { width: min(920px, calc(100% - 24px)); }
+.co-grid { display: flex; flex-wrap: wrap; gap: 0 28px; }
+.co-grid > form { flex: 3 1 360px; min-width: 0; }
+.co-sum { flex: 2 1 260px; min-width: 0; background: var(--sand); padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; align-self: flex-start; margin: 18px 20px 22px 0; }
+@media (max-width: 700px) { .co-sum { margin: 0 20px 22px; } }
+.co-sum h3 { margin: 0 0 4px; font-family: var(--display); font-size: 24px; color: var(--maroon); }
+.co-item { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
+.co-step { margin: 12px 0 0; font-family: var(--display); font-size: 22px; color: var(--maroon); }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 0 12px; }
+.two > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pay { display: flex; flex-direction: column; gap: 8px; }
+.pay label { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); background: #FFFFFF; padding: 12px; font-weight: 600; margin: 0; cursor: pointer; }
+.pay label small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+.pay input, .consent input { width: 18px; height: 18px; flex: 0 0 auto; accent-color: var(--maroon); }
+.pay label:has(input:checked) { border-color: var(--maroon); box-shadow: inset 0 0 0 1px var(--maroon); }
+.pay label:has(input:disabled) { opacity: .55; cursor: not-allowed; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-weight: 400 !important; font-size: 14px !important; }
+.consent input { margin-top: 2px; height: 18px !important; }
+.done-box { text-align: center; align-items: center; }
+.done-box .tick { width: 64px; height: 64px; border-radius: 50%; background: var(--maroon); color: var(--on-maroon); display: grid; place-items: center; }
+/* WhatsApp chat button */
+.wa-float { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; width: 58px; height: 58px; border-radius: 50%; background: #1F7A4D; color: #fff; display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0,0,0,.25); text-decoration: none; }
+.wa-float:hover { background: #17633E; }
+.wa-float svg { width: 30px; height: 30px; }
+.legal .links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.legal .links .foot-link { font-size: 13px; color: var(--muted); padding: 0; min-height: 32px; }
 </style>
 </head>
 <body>
@@ -290,15 +376,15 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     </a>
     <div class="icons">
       <button class="icon-btn" type="button" id="account-btn" data-open="account-dlg" aria-label="Sign in or create account"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.3-3.8 4.2-5.5 7.5-5.5s6.2 1.7 7.5 5.5"/></svg><span class="count" id="account-dot" hidden></span></button>
-      <button class="icon-btn" type="button" aria-label="Search" data-toast="Search is coming soon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Search sarees" id="search-btn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
       <button class="icon-btn" type="button" id="wishlist-btn" aria-label="Wishlist, 0 items"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="count" id="wish-count" hidden>0</span></button>
       <button class="icon-btn" type="button" id="bag-btn" aria-label="Shopping bag, 0 items"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="count" id="bag-count" hidden>0</span></button>
     </div>
     <nav class="main" aria-label="Main">
       <a href="#new">New Arrivals</a>
-      <a href="#collections">Kanjivaram</a>
-      <a href="#collections">Banarasi</a>
-      <a href="#new">All Sarees</a>
+      <a href="#new" data-weave="Kanjivaram">Kanjivaram</a>
+      <a href="#new" data-weave="Banarasi">Banarasi</a>
+      <a href="#new" data-weave="">All Sarees</a>
       <a href="#wholesale">Wholesale</a>
     </nav>
   </div>
@@ -386,20 +472,41 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     <div class="wrap">
       <div class="sec-head"><h2 class="display">Shop by weave</h2><a href="#new">View all sarees</a></div>
       <div class="cols">
-        <a class="col" href="#new"><div class="ph"><img src="img/a3.jpg" alt="Turmeric yellow silk saree with a leaf green zari border" loading="lazy"></div><div><b>Dharmavaram Silk</b><small>Rich zari pallus from Andhra</small></div></a>
-        <a class="col" href="#new"><div class="ph"><img src="img/mangalagiri.jpg" alt="Mangalagiri sarees with zari borders on a shop counter" loading="lazy"></div><div><b>Mangalagiri Cotton</b><small>Light cotton with zari borders</small></div></a>
-        <a class="col" href="#new"><div class="ph"><img src="img/hero-silk.jpg" alt="Mustard and red Pochampally ikat silk" loading="lazy"></div><div><b>Pochampally Silk</b><small>Ikat patterns from Telangana</small></div></a>
-        <a class="col" href="#new"><div class="ph"><img src="img/p6.jpg" alt="Folded silk sarees with gold zari borders on a shelf" loading="lazy"></div><div><b>Kanjivaram Silk</b><small>Heavy zari, temple borders</small></div></a>
-        <a class="col" href="#new"><div class="ph"><img src="img/a2.jpg" alt="Peacock teal Banarasi Silk with a brinjal border" loading="lazy"></div><div><b>Banarasi Silk</b><small>Gold buta and brocade</small></div></a>
-        <a class="col" href="#new"><div class="ph"><img src="img/mysore.jpg" alt="Red Mysore Silk saree with a gold paisley zari border" loading="lazy"></div><div><b>Mysore Silk</b><small>Light crepe, everyday elegance</small></div></a>
+        <a class="col" href="#new" data-weave="Dharmavaram"><div class="ph"><img src="img/a3.jpg" alt="Turmeric yellow silk saree with a leaf green zari border" loading="lazy"></div><div><b>Dharmavaram Silk</b><small>Rich zari pallus from Andhra</small></div></a>
+        <a class="col" href="#new" data-weave="Mangalagiri"><div class="ph"><img src="img/mangalagiri.jpg" alt="Mangalagiri sarees with zari borders on a shop counter" loading="lazy"></div><div><b>Mangalagiri Cotton</b><small>Light cotton with zari borders</small></div></a>
+        <a class="col" href="#new" data-weave="Pochampally"><div class="ph"><img src="img/hero-silk.jpg" alt="Mustard and red Pochampally ikat silk" loading="lazy"></div><div><b>Pochampally Silk</b><small>Ikat patterns from Telangana</small></div></a>
+        <a class="col" href="#new" data-weave="Kanjivaram"><div class="ph"><img src="img/p6.jpg" alt="Folded silk sarees with gold zari borders on a shelf" loading="lazy"></div><div><b>Kanjivaram Silk</b><small>Heavy zari, temple borders</small></div></a>
+        <a class="col" href="#new" data-weave="Banarasi"><div class="ph"><img src="img/a2.jpg" alt="Peacock teal Banarasi Silk with a brinjal border" loading="lazy"></div><div><b>Banarasi Silk</b><small>Gold buta and brocade</small></div></a>
+        <a class="col" href="#new" data-weave="Mysore"><div class="ph"><img src="img/mysore.jpg" alt="Red Mysore Silk saree with a gold paisley zari border" loading="lazy"></div><div><b>Mysore Silk</b><small>Light crepe, everyday elegance</small></div></a>
       </div>
     </div>
   </section>
 
   <section class="block" id="new">
     <div class="wrap">
-      <div class="sec-head"><div><h2 class="display">New this week</h2><p>Tap a colour to see each saree in it</p></div><a href="#new">Shop all 50+ sarees</a></div>
+      <div class="sec-head"><div><h2 class="display">Shop sarees</h2><p>Tap a saree to see details, or a colour to see it in that colour</p></div></div>
+      <div class="trade-note" id="trade-note" hidden></div>
+      <div class="toolbar" role="search">
+        <div class="q"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search by name, weave, colour or code" aria-label="Search sarees" autocomplete="off"></div>
+        <select id="f-weave" aria-label="Weave"><option value="">All weaves</option><option>Dharmavaram</option><option>Mangalagiri</option><option>Pochampally</option><option>Kanjivaram</option><option>Banarasi</option><option>Mysore</option><option value="Other">Soft and jacquard silk</option></select>
+        <select id="f-occ" aria-label="Occasion"><option value="">Any occasion</option><option>Wedding</option><option>Festive</option><option>Party</option><option>Daily wear</option></select>
+        <select id="f-price" aria-label="Price"><option value="">Any price</option><option value="0-5000">Under ₹5,000</option><option value="5000-10000">₹5,000 to ₹10,000</option><option value="10000-15000">₹10,000 to ₹15,000</option><option value="15000-999999">Above ₹15,000</option></select>
+        <select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rating">Top rated</option></select>
+      </div>
+      <div class="result-row"><span id="count" aria-live="polite"></span><button class="linkish" type="button" id="clear-f" hidden>Clear filters</button></div>
       <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="reviews" aria-labelledby="rv-title">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 class="display" id="rv-title">What our customers say</h2><p>Sample reviews for this preview. Real reviews appear once orders begin.</p></div></div>
+      <div class="reviews-sum"><span class="big">4.8</span><div><div class="stars" aria-label="4.8 out of 5 stars">★★★★★</div><small class="muted">from 210 reviews (sample)</small></div></div>
+      <div class="rv-grid">
+        <figure class="rv-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“The Kanjivaram I ordered for my sister's wedding was even richer in person. The zari border is beautiful.”</blockquote><figcaption><b>Meena K.</b>, Hyderabad · Kanjivaram Silk</figcaption></figure>
+        <figure class="rv-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Packed with care and delivered in three days. The colour matched the photo exactly.”</blockquote><figcaption><b>Divya R.</b>, Chennai · Banarasi Silk</figcaption></figure>
+        <figure class="rv-card"><div class="stars" aria-label="4 out of 5 stars">★★★★☆</div><blockquote>“We buy for our shop every month. Good prices, honest people and they always send new designs on WhatsApp.”</blockquote><figcaption><b>Ravi Kumar</b>, Vijayawada · Wholesale buyer</figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -409,7 +516,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       <div class="txt">
         <h2 class="display">Buying for your shop?</h2>
         <p>Swasthik Veda is a trusted wholesale supplier of quality weaves at the best prices. Get our wholesale catalog with product codes and bulk rates on WhatsApp, or call us.</p>
-        <div><button class="btn wa-btn" type="button" data-open="ws-dlg"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>Get the catalog on WhatsApp</button></div>
+        <div><button class="btn wa-btn" type="button" data-open="ws-dlg"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>Get the catalog on WhatsApp</button> <button class="btn gold" type="button" data-open="trade-dlg" id="trade-btn">Wholesale login</button></div>
         <div class="phones">
           <a class="phone" href="tel:+918555063040"><small>SAI</small><b>85550 63040</b></a>
           <a class="phone" href="tel:+917989077958"><small>VENKAT</small><b>79890 77958</b></a>
@@ -436,10 +543,10 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
         <p class="msg" id="news-msg" aria-live="polite"></p>
       </form>
     </div>
-    <nav aria-label="Shop"><span>Shop</span><a href="#collections">Dharmavaram Silk</a><a href="#collections">Mangalagiri Cotton</a><a href="#collections">Pochampally Silk</a><a href="#collections">Kanjivaram Silk</a><a href="#collections">Banarasi Silk</a><a href="#collections">Mysore Silk</a><a href="#wholesale">Wholesale</a></nav>
+    <nav aria-label="Shop"><span>Shop</span><a href="#new" data-weave="Dharmavaram">Dharmavaram Silk</a><a href="#new" data-weave="Mangalagiri">Mangalagiri Cotton</a><a href="#new" data-weave="Pochampally">Pochampally Silk</a><a href="#new" data-weave="Kanjivaram">Kanjivaram Silk</a><a href="#new" data-weave="Banarasi">Banarasi Silk</a><a href="#new" data-weave="Mysore">Mysore Silk</a><a href="#wholesale">Wholesale</a></nav>
     <nav aria-label="Help"><span>Help</span><button type="button" class="foot-link" data-open="ship-dlg">Shipping</button><button type="button" class="foot-link" data-open="returns-dlg">Returns and Exchanges</button><button type="button" class="foot-link" data-open="contact-dlg">Contact Us</button><button type="button" class="foot-link" data-open="track-dlg">Track Your Order</button></nav>
   </div>
-  <div class="legal"><div class="wrap"><span>© 2026 Swasthik Veda Weavers Collection. All prices in INR.</span><span>Sri Chowdeshwary Devi Prasanna</span></div><div class="wrap credits">Photos: Mangalagiri sarees by Durgarao Vuddanti (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>), Mysore Silk saree by Kiranravikumar (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>), via Wikimedia Commons.</div></div>
+  <div class="legal"><div class="wrap"><span>© 2026 Swasthik Veda Weavers Collection. All prices in INR.</span><span class="links"><button type="button" class="foot-link" data-open="privacy-dlg">Privacy Policy</button><button type="button" class="foot-link" data-open="terms-dlg">Terms of Service</button></span><span>Sri Chowdeshwary Devi Prasanna</span></div><div class="wrap credits">Photos: Mangalagiri sarees by Durgarao Vuddanti (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>), Mysore Silk saree by Kiranravikumar (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>), via Wikimedia Commons.</div></div>
 </footer>
 
 <div class="scrim" id="scrim" hidden></div>
@@ -617,14 +724,104 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   <div id="ws-done" class="stack" hidden></div>
 </dialog>
 
+<dialog class="dlg pd" id="pd-dlg" aria-labelledby="pd-title">
+  <div class="dlg-head"><h2 class="display" id="pd-title" style="font-size: 22px">Saree details</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div id="pd-body"></div>
+</dialog>
+
+<dialog class="dlg co" id="co-dlg" aria-labelledby="co-title">
+  <div class="dlg-head"><h2 class="display" id="co-title">Checkout</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="co-grid" id="co-main">
+    <form class="stack" id="co-form" novalidate>
+      <p class="co-step">1. Delivery address</p>
+      <div class="two"><div><label for="co-name">Full name</label><input id="co-name" autocomplete="name"></div>
+      <div><label for="co-phone">Mobile number</label><div class="phone-in"><span>+91</span><input id="co-phone" inputmode="numeric" maxlength="10" autocomplete="tel-national"></div></div></div>
+      <label for="co-email">Email (for your invoice)</label><input id="co-email" type="email" autocomplete="email">
+      <label for="co-addr">House number, street and area</label><input id="co-addr" autocomplete="street-address">
+      <div class="two"><div><label for="co-city">City</label><input id="co-city" autocomplete="address-level2"></div>
+      <div><label for="co-pin">Pincode</label><input id="co-pin" inputmode="numeric" maxlength="6" autocomplete="postal-code"></div></div>
+      <label for="co-state">State</label>
+      <select id="co-state" autocomplete="address-level1"><option value="">Choose state</option><option>Andhra Pradesh</option><option>Karnataka</option><option>Kerala</option><option>Tamil Nadu</option><option>Telangana</option><option>Maharashtra</option><option>Delhi</option><option>Gujarat</option><option>West Bengal</option><option>Uttar Pradesh</option><option>Other</option></select>
+      <p class="co-step">2. Payment</p>
+      <div class="pay" id="co-pay"></div>
+      <p class="co-step">3. Confirm</p>
+      <label class="consent"><input type="checkbox" id="co-mkt"> Send me new arrivals and offers on WhatsApp and email (optional)</label>
+      <p class="hint">We use your name, phone, email and address only to deliver this order and send your invoice. By placing the order you agree to our <button type="button" class="linkish" data-open="terms-dlg" style="min-height:0;padding:0">Terms</button> and <button type="button" class="linkish" data-open="privacy-dlg" style="min-height:0;padding:0">Privacy Policy</button>.</p>
+      <p class="form-msg" id="co-msg" aria-live="polite"></p>
+      <button class="btn solid" type="submit" id="co-place">Place order</button>
+    </form>
+    <aside class="co-sum" id="co-sum" aria-label="Order summary"></aside>
+  </div>
+  <div class="stack done-box" id="co-done" hidden></div>
+</dialog>
+
+<dialog class="dlg" id="trade-dlg" aria-labelledby="trade-title">
+  <div class="dlg-head"><h2 class="display" id="trade-title">Wholesale login</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <form class="stack" id="trade-form" novalidate>
+    <p>Registered shops see wholesale prices on every saree and can order in bulk.</p>
+    <label for="tr-shop-id">Registered phone number</label><div class="phone-in"><span>+91</span><input id="tr-shop-id" inputmode="numeric" maxlength="10" autocomplete="username"></div>
+    <label for="tr-shop-pw">Password</label><input id="tr-shop-pw" type="password" autocomplete="current-password">
+    <p class="form-msg" id="trade-msg" aria-live="polite"></p>
+    <button class="btn solid" type="submit">Sign in</button>
+    <div class="demo-box">
+      <p><b>Demo shop account</b> · tap to fill in, then Sign in.</p>
+      <button type="button" class="demo-acc" id="trade-demo"><b>Lakshmi Silks, Vijayawada</b><small>90000 00010 · password demo123</small></button>
+    </div>
+    <p class="hint">New shop? <button type="button" class="linkish" data-open="ws-dlg" style="min-height:0;padding:0">Request the catalog and an account</button>. We verify your shop and GST before giving access.</p>
+  </form>
+  <div class="stack" id="trade-in" hidden></div>
+</dialog>
+
+<dialog class="dlg wide" id="privacy-dlg" aria-labelledby="pv-title">
+  <div class="dlg-head"><h2 class="display" id="pv-title">Privacy Policy</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="stack prose">
+    <p>Swasthik Veda collects only the personal data it needs to sell and deliver your sarees, and never sells it. We follow the Digital Personal Data Protection Act 2023.</p>
+    <h3>What we collect and why</h3>
+    <ul><li><b>Name, phone, email and address</b> to take, deliver and support your order</li><li><b>Payment status</b> to confirm payment and process refunds. We never store your card number, CVV or UPI PIN.</li><li><b>Order history</b> for returns, invoices and GST records</li><li><b>Messages you send us</b> to answer your questions</li><li><b>Marketing preferences</b>, only if you tick the optional box</li></ul>
+    <h3>Who we share it with</h3>
+    <p>Only what each partner needs: our courier, our payment gateway, our website host and our messaging provider, or the government when Indian law requires it.</p>
+    <h3>Your rights</h3>
+    <p>You can ask what data we hold, correct it, ask us to erase it, or withdraw consent at any time. Write to swasthikvedasilks@gmail.com. We reply within 30 days.</p>
+    <h3>Cookies</h3>
+    <p>We use essential cookies for your bag and login. Analytics cookies are used only with your permission.</p>
+    <p class="hint">Draft wording from our store policies. To be confirmed before launch.</p>
+  </div>
+</dialog>
+
+<dialog class="dlg wide" id="terms-dlg" aria-labelledby="tm-title">
+  <div class="dlg-head"><h2 class="display" id="tm-title">Terms of Service</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="stack prose">
+    <p>By using this website or placing an order, you agree to these terms. They are governed by the laws of India.</p>
+    <h3>About us</h3>
+    <div class="tbl"><table><tbody>
+      <tr><th>Business</th><td>Swasthik Veda Weavers Collection (legal name to be confirmed)</td></tr>
+      <tr><th>Address</th><td>#13, Sri Vari Nilaya, Murali Layout, Aduru, Bidarahalli Hobli, Virgonagar Post, Bengaluru 560049, Karnataka</td></tr>
+      <tr><th>GSTIN</th><td>To be added</td></tr>
+      <tr><th>Customer care</th><td>swasthikvedasilks@gmail.com · +91 85550 63040 · +91 79890 77958</td></tr>
+      <tr><th>Grievance Officer</th><td>To be named</td></tr>
+    </tbody></table></div>
+    <h3>Products and prices</h3>
+    <p>Every price includes GST. Each saree shows its fabric, length, care and origin. We only call a saree pure silk or handloom when it is. Colours may look slightly different on screens.</p>
+    <h3>Orders and payment</h3>
+    <p>Your order is confirmed when you receive our confirmation SMS or email. We show every charge, including shipping and the cash on delivery fee, before you pay. A GST invoice comes with every parcel.</p>
+    <h3>Reviews</h3>
+    <p>We publish honest reviews, good and bad. We never write or buy reviews.</p>
+    <h3>Complaints</h3>
+    <p>Contact customer care. We acknowledge complaints within 48 hours and resolve them within one month. You can also call the National Consumer Helpline on 1915.</p>
+    <p class="hint">Draft wording from our store policies. To be confirmed before launch.</p>
+  </div>
+</dialog>
+
+<a class="wa-float" id="wa-float" href="https://wa.me/918555063040?text=Hello%20Swasthik%20Veda%2C%20I%20have%20a%20question%20about%20your%20sarees." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg></a>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
   var products = [
-    { code: 'SV-SFT-101', weave: 'SOFT SILK', name: 'Jacquard soft silk, assorted festive colours', price: '₹6,450', tag: 'NEW', img: 'img/p1.jpg', alt: 'Rolls of jacquard silk in purple, pink, orange, blue and green' },
-    { code: 'SV-BNR-201', weave: 'BANARASI', name: 'Georgette with gold zari buta, teal blue', price: '₹9,200', img: 'img/p2.jpg', alt: 'Teal blue Banarasi saree with gold zari buta' },
-    { code: 'SV-BNR-202', weave: 'BANARASI', name: 'Banarasi Silk with contrast zari border', price: '₹14,500', tag: 'BESTSELLER', alt: 'Banarasi Silk saree with a wide contrast zari border', colors: [
+    { code: 'SV-SFT-101', fam: 'Other', occ: 'Festive', fabric: 'Soft silk with jacquard weave', rating: 4.6, nrev: 11, weave: 'SOFT SILK', name: 'Jacquard soft silk, assorted festive colours', price: '₹6,450', tag: 'NEW', img: 'img/p1.jpg', alt: 'Rolls of jacquard silk in purple, pink, orange, blue and green' },
+    { code: 'SV-BNR-201', fam: 'Banarasi', occ: 'Party', fabric: 'Georgette with zari buta', rating: 4.7, nrev: 18, weave: 'BANARASI', name: 'Georgette with gold zari buta, teal blue', price: '₹9,200', img: 'img/p2.jpg', alt: 'Teal blue Banarasi saree with gold zari buta' },
+    { code: 'SV-BNR-202', fam: 'Banarasi', occ: 'Wedding', fabric: 'Banarasi silk with contrast zari border', rating: 4.9, nrev: 41, weave: 'BANARASI', name: 'Banarasi Silk with contrast zari border', price: '₹14,500', tag: 'BESTSELLER', alt: 'Banarasi Silk saree with a wide contrast zari border', colors: [
       { name: 'Peach + Maroon', hex: '#F4A582', img: 'img/p3.jpg' },
       { name: 'Ivory + Kumkum Red', hex: '#F3E9D2', img: 'img/a1.jpg' },
       { name: 'Peacock Teal + Brinjal', hex: '#0F6B6E', img: 'img/a2.jpg' },
@@ -632,15 +829,19 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       { name: 'Blush + Wine', hex: '#F2B8C0', img: 'img/a4.jpg' },
       { name: 'Powder Blue + Navy', hex: '#A9CFEA', img: 'img/a5.jpg' },
       { name: 'Lilac + Plum', hex: '#C9A6E3', img: 'img/a6.jpg' } ] },
-    { code: 'SV-BNR-203', weave: 'BANARASI', name: 'Georgette with gold zari buta', price: '₹9,200', alt: 'Banarasi georgette saree with gold zari buta', colors: [
+    { code: 'SV-BNR-203', fam: 'Banarasi', occ: 'Festive', fabric: 'Banarasi georgette with zari buta', rating: 4.7, nrev: 20, weave: 'BANARASI', name: 'Georgette with gold zari buta', price: '₹9,200', alt: 'Banarasi georgette saree with gold zari buta', colors: [
       { name: 'Emerald Green', hex: '#1D5E3A', img: 'img/b1.jpg' },
       { name: 'Kumkum Maroon', hex: '#7E1A2C', img: 'img/b2.jpg' },
       { name: 'Rani Pink', hex: '#B5156B', img: 'img/b3.jpg' },
       { name: 'Aubergine', hex: '#4F1D4F', img: 'img/b4.jpg' },
       { name: 'Turmeric Mustard', hex: '#C08A1A', img: 'img/b5.jpg' },
       { name: 'Dusty Rose', hex: '#A85A6A', img: 'img/b6.jpg' } ] },
-    { code: 'SV-JQD-301', weave: 'JACQUARD SILK', name: 'Paisley jacquard silk, choose your colour', price: '₹7,800', img: 'img/p5.jpg', alt: 'Stacked rolls of paisley jacquard silk in many colours' },
-    { code: 'SV-KAN-401', weave: 'KANJIVARAM', name: 'Pure silk with zari border, assorted colours', price: '₹18,900', tag: 'NEW', img: 'img/p6.jpg', alt: 'Folded silk sarees with gold zari borders on a shelf' }
+    { code: 'SV-JQD-301', fam: 'Other', occ: 'Daily wear', fabric: 'Jacquard silk', rating: 4.5, nrev: 9, weave: 'JACQUARD SILK', name: 'Paisley jacquard silk, choose your colour', price: '₹7,800', img: 'img/p5.jpg', alt: 'Stacked rolls of paisley jacquard silk in many colours' },
+    { code: 'SV-KAN-401', fam: 'Kanjivaram', occ: 'Wedding', fabric: 'Pure Kanjivaram silk with zari border', rating: 4.9, nrev: 27, weave: 'KANJIVARAM', name: 'Pure silk with zari border, assorted colours', price: '₹18,900', tag: 'NEW', img: 'img/p6.jpg', alt: 'Folded silk sarees with gold zari borders on a shelf' },
+    { code: 'SV-DHR-501', fam: 'Dharmavaram', occ: 'Wedding', fabric: 'Pure Dharmavaram silk with zari pallu', rating: 4.8, nrev: 12, weave: 'DHARMAVARAM', name: 'Dharmavaram Silk with rich zari pallu', price: '₹16,800', tag: 'NEW', img: 'img/a3.jpg', alt: 'Turmeric yellow silk saree with a leaf green zari border' },
+    { code: 'SV-MNG-601', fam: 'Mangalagiri', occ: 'Daily wear', fabric: 'Handloom Mangalagiri cotton with zari border', rating: 4.6, nrev: 15, weave: 'MANGALAGIRI', name: 'Mangalagiri Cotton with nizam zari border', price: '₹2,450', img: 'img/mangalagiri.jpg', alt: 'Mangalagiri sarees with zari borders on a shop counter' },
+    { code: 'SV-PCH-701', fam: 'Pochampally', occ: 'Festive', fabric: 'Pochampally ikat silk', rating: 4.7, nrev: 16, weave: 'POCHAMPALLY', name: 'Pochampally Silk ikat, mustard and red', price: '₹11,200', img: 'img/hero-silk.jpg', alt: 'Mustard and red Pochampally ikat silk' },
+    { code: 'SV-MYS-801', fam: 'Mysore', occ: 'Festive', fabric: 'Mysore crepe silk with gold zari', rating: 4.8, nrev: 14, weave: 'MYSORE', name: 'Mysore Silk crepe with paisley border', price: '₹8,900', img: 'img/mysore.jpg', alt: 'Red Mysore Silk saree with a gold paisley zari border' }
   ];
   var heart = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
   var grid = document.getElementById('grid');
@@ -678,8 +879,22 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   function toNum(p) { return +p.replace(/[^0-9]/g, ''); }
   function inr(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function renderCart() {
+  function totals() {
     var count = cart.reduce(function (n, x) { return n + x.qty; }, 0);
+    var sub = cart.reduce(function (n, x) { return n + unit(products[x.idx]) * x.qty; }, 0);
+    var off = trade ? 0 : sub * OFFER, after = sub - off, codeOff = (!trade && applied) ? after * WELCOME_PCT : 0;
+    var ship = zone ? zone.cost : null;
+    return { count: count, sub: sub, off: off, codeOff: codeOff, ship: ship, total: after - codeOff + (ship || 0) };
+  }
+  function sumRows(t, withShipDates) {
+    return '<div class="sum"><span>Subtotal (' + t.count + (t.count === 1 ? ' saree' : ' sarees') + ')</span><span>' + inr(t.sub) + '</span></div>' +
+      (trade ? '<div class="sum offer-line"><span>Wholesale prices</span><span>' + esc(trade.shop) + '</span></div>' : '<div class="sum offer-line"><span>New Year offer, 27% off*</span><span>−' + inr(t.off) + '</span></div>') +
+      (t.codeOff ? '<div class="sum offer-line"><span>Code ' + esc(applied) + ', 10% off</span><span>−' + inr(t.codeOff) + '</span></div>' : '') +
+      '<div class="sum"><span>Shipping' + (zone ? ' to ' + pin : '') + '</span><span>' + (zone ? inr(t.ship) : 'Enter pincode') + '</span></div>' +
+      (zone && withShipDates ? '<div class="sum"><span>Delivery</span><span>' + zone.dates + '</span></div>' : '');
+  }
+  function renderCart() {
+    var t = totals(), count = t.count;
     setCount('bag-count', 'bag-btn', count, 'Shopping bag');
     var body = document.getElementById('cart-body'), foot = document.getElementById('cart-foot');
     if (!cart.length) {
@@ -689,20 +904,16 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     body.innerHTML = cart.map(function (x, i) {
       return '<div class="line-item"><img src="' + x.img + '" alt=""><div><b>' + esc(x.name) + '</b><small>Code: ' + esc(x.code) + '</small>' + (x.colour ? '<small>Colour: ' + esc(x.colour) + '</small>' : '') +
         '<div class="li-row"><div class="qty"><button type="button" data-act="dec" data-i="' + i + '" aria-label="One less">−</button><span aria-label="Quantity">' + x.qty + '</span><button type="button" data-act="inc" data-i="' + i + '" aria-label="One more">+</button></div>' +
-        '<span class="li-price">' + inr(x.price * x.qty) + '</span></div><button class="remove" type="button" data-act="rm" data-i="' + i + '">Remove</button></div></div>';
+        '<span class="li-price">' + inr(unit(products[x.idx]) * x.qty) + '</span></div><button class="remove" type="button" data-act="rm" data-i="' + i + '">Remove</button></div></div>';
     }).join('');
-    var sub = cart.reduce(function (n, x) { return n + x.price * x.qty; }, 0), off = sub * OFFER;
     foot.hidden = false;
-    var after = sub - off, codeOff = applied ? after * WELCOME_PCT : 0;
-    var ship = zone ? zone.cost : null, total = after - codeOff + (ship || 0);
-    document.getElementById('cart-sums').innerHTML = '<div class="sum"><span>Subtotal (' + count + (count === 1 ? ' saree' : ' sarees') + ')</span><span>' + inr(sub) + '</span></div>' +
-      '<div class="sum offer-line"><span>New Year offer, 27% off*</span><span>−' + inr(off) + '</span></div>' +
-      (applied ? '<div class="sum offer-line"><span>Code ' + esc(applied) + ', 10% off</span><span>−' + inr(codeOff) + '</span></div>' : '') +
-      '<div class="sum"><span>Shipping' + (zone ? ' to ' + pin : '') + '</span><span>' + (zone ? inr(ship) : 'Enter pincode') + '</span></div>' +
-      (zone ? '<div class="sum"><span>Delivery</span><span>' + zone.dates + '</span></div>' : '') +
-      '<div class="sum total"><span>Total</span><span>' + inr(total) + '</span></div>' +
-      '<button class="btn solid" type="button" data-act="checkout">Checkout</button>' +
-      '<small>*T&amp;C apply. The welcome code applies after the sale price. Prices include GST. Sample prices, shipping charges and delivery times for this preview.</small>';
+    document.getElementById('code-form').hidden = !!trade;
+    var short = trade && count < WS_MIN;
+    document.getElementById('cart-sums').innerHTML = sumRows(t, true) +
+      '<div class="sum total"><span>Total</span><span>' + inr(t.total) + '</span></div>' +
+      (short ? '<p class="pin-msg err" style="margin:0">Add ' + (WS_MIN - count) + ' more ' + (WS_MIN - count === 1 ? 'piece' : 'pieces') + ' to reach the wholesale minimum of ' + WS_MIN + '.</p>' : '') +
+      '<button class="btn solid" type="button" data-act="checkout"' + (short ? ' disabled style="opacity:.5;cursor:not-allowed"' : '') + '>Checkout</button>' +
+      '<small>' + (trade ? 'Wholesale prices exclude offers and welcome codes. Sample prices for this preview.' : '*T&amp;C apply. The welcome code applies after the sale price. Prices include GST. Sample prices, shipping charges and delivery times for this preview.') + '</small>';
   }
   function openCart() { lastFocus = document.activeElement; scrim.hidden = false; drawer.hidden = false; document.body.style.overflow = 'hidden'; document.getElementById('cart-close').focus(); }
   function closeCart() { scrim.hidden = true; drawer.hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
@@ -718,8 +929,19 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   }
 
   function codeOf(p, j) { return p.colors ? p.code + '-' + String(j + 1).padStart(2, '0') : p.code; }
+  var sel = products.map(function () { return 0; });
+  var trade = null, WS_MIN = 10, COD_LIMIT = 15000, COD_FEE = 50;
+  function wsPrice(p) { return Math.round(toNum(p.price) * 0.6 / 10) * 10; }
+  function unit(p) { return trade ? wsPrice(p) : toNum(p.price); }
+  function stars(r) { var f = Math.round(r); return '★★★★★'.slice(0, f) + '☆☆☆☆☆'.slice(0, 5 - f); }
+  function priceHtml(p) {
+    return trade ? '<b class="ws">' + inr(wsPrice(p)) + '</b><small>wholesale, per piece</small><s>' + p.price + '</s>'
+                 : '<b>' + p.price + '</b><small>incl. GST</small>';
+  }
+  function imgOf(p, j) { return p.colors ? p.colors[j].img : p.img; }
+
   products.forEach(function (p, i) {
-    var card = document.createElement('article'); card.className = 'card';
+    var card = document.createElement('article'); card.className = 'card'; card.dataset.i = i;
     var first = p.colors ? p.colors[0] : null, sws = '';
     if (p.colors) {
       sws = '<div class="swatches" role="group" aria-label="Choose a colour">';
@@ -728,28 +950,41 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       });
       sws += '</div>';
     }
-    var html = '<div class="ph"><img id="img-' + i + '" src="' + (first ? first.img : p.img) + '" alt="' + p.alt + (first ? ', ' + first.name : '') + '" loading="lazy">' +
+    card.innerHTML = '<div class="ph"><img id="img-' + i + '" data-pd="' + i + '" src="' + imgOf(p, 0) + '" alt="' + p.alt + (first ? ', ' + first.name : '') + '" loading="lazy">' +
       (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
       '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button>' + sws +
       (p.colors ? '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong></div>' : '') + '</div>' +
-      '<div class="weave-row"><span class="weave">' + p.weave + '</span><span class="pcode">Code: <b id="code-' + i + '">' + codeOf(p, 0) + '</b></span></div>';
-    html += '<h3>' + p.name + '</h3><div class="price"><b>' + p.price + '</b><small>incl. GST</small></div>' +
+      '<div class="weave-row"><span class="weave">' + p.weave + '</span><span class="pcode">Code: <b id="code-' + i + '">' + codeOf(p, 0) + '</b></span></div>' +
+      '<h3><button class="pd-link" type="button" data-pd="' + i + '">' + p.name + '</button></h3>' +
+      '<div class="stars">' + stars(p.rating) + ' <small>' + p.rating + ' (' + p.nrev + ')</small></div>' +
+      '<div class="price" id="price-' + i + '">' + priceHtml(p) + '</div>' +
       '<button class="btn line add" type="button" data-p="' + i + '">Add to bag</button>';
-    card.innerHTML = html;
     grid.appendChild(card);
   });
+  var noRes = document.createElement('div'); noRes.className = 'no-results'; noRes.hidden = true;
+  noRes.innerHTML = '<p>No sarees match. Try another word or clear the filters.</p><button class="btn line" type="button" id="clear-f2">Clear filters</button>';
+  grid.appendChild(noRes);
+
+  function showColour(i, j) {
+    var p = products[i], c = p.colors[j]; sel[i] = j;
+    var img = document.getElementById('img-' + i);
+    img.src = c.img; img.alt = p.alt + ', ' + c.name;
+    document.getElementById('cname-' + i).textContent = c.name;
+    document.getElementById('code-' + i).textContent = codeOf(p, j);
+    grid.querySelectorAll('.sw[data-p="' + i + '"]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.c === j)); });
+  }
+  function addToBag(idx) {
+    var pr = products[idx], j = sel[idx], colour = pr.colors ? pr.colors[j].name : '', code = codeOf(pr, j);
+    var found = cart.find(function (x) { return x.key === code; });
+    if (found) found.qty += 1;
+    else cart.push({ key: code, code: code, idx: idx, name: pr.name, colour: colour, img: imgOf(pr, j), qty: 1 });
+    renderCart();
+    toast('Added to bag: ' + code + (colour ? ' (' + colour + ')' : ''));
+  }
 
   grid.addEventListener('click', function (e) {
     var sw = e.target.closest('.sw');
-    if (sw) {
-      var p = products[+sw.dataset.p], c = p.colors[+sw.dataset.c];
-      var img = document.getElementById('img-' + sw.dataset.p);
-      img.src = c.img; img.alt = p.alt + ', ' + c.name;
-      document.getElementById('cname-' + sw.dataset.p).textContent = c.name;
-      document.getElementById('code-' + sw.dataset.p).textContent = codeOf(p, +sw.dataset.c);
-      sw.parentNode.querySelectorAll('.sw').forEach(function (b) { b.setAttribute('aria-pressed', String(b === sw)); });
-      return;
-    }
+    if (sw) { showColour(+sw.dataset.p, +sw.dataset.c); return; }
     var w = e.target.closest('.wish');
     if (w) {
       var on = w.getAttribute('aria-pressed') !== 'true';
@@ -759,17 +994,134 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       return;
     }
     var a = e.target.closest('.add');
-    if (a) {
-      var idx = +a.dataset.p, pr = products[idx], nameEl = document.getElementById('cname-' + idx);
-      var colour = nameEl ? nameEl.textContent : '', code = document.getElementById('code-' + idx).textContent, key = code;
-      var found = cart.find(function (x) { return x.key === key; });
-      if (found) found.qty += 1;
-      else cart.push({ key: key, code: code, name: pr.name, colour: colour, price: toNum(pr.price), img: document.getElementById('img-' + idx).getAttribute('src'), qty: 1 });
-      renderCart();
-      toast('Added to bag: ' + code + (colour ? ' (' + colour + ')' : ''));
-    }
+    if (a) { addToBag(+a.dataset.p); return; }
+    var pd = e.target.closest('[data-pd]');
+    if (pd) openProduct(+pd.dataset.pd);
   });
 
+  /* ---------- Search, filters, sort ---------- */
+  var fq = document.getElementById('q'), fw = document.getElementById('f-weave'), fo = document.getElementById('f-occ'), fp = document.getElementById('f-price'), fs = document.getElementById('sort');
+  function hay(p) { return [p.name, p.weave, p.fam, p.occ, p.fabric, p.code].concat(p.colors ? p.colors.map(function (c, j) { return c.name + ' ' + codeOf(p, j); }) : []).join(' ').toLowerCase(); }
+  function applyFilters() {
+    var q = fq.value.trim().toLowerCase(), wv = fw.value, oc = fo.value, pr = fp.value ? fp.value.split('-').map(Number) : null, shown = 0;
+    var order = products.map(function (p, i) { return i; });
+    if (fs.value === 'low') order.sort(function (a, b) { return unit(products[a]) - unit(products[b]); });
+    if (fs.value === 'high') order.sort(function (a, b) { return unit(products[b]) - unit(products[a]); });
+    if (fs.value === 'rating') order.sort(function (a, b) { return products[b].rating - products[a].rating; });
+    order.forEach(function (i, pos) {
+      var p = products[i], card = grid.querySelector('.card[data-i="' + i + '"]'), price = unit(p);
+      var ok = (!q || q.split(/\s+/).every(function (t) { return hay(p).indexOf(t) > -1; })) && (!wv || p.fam === wv) && (!oc || p.occ === oc) && (!pr || (price >= pr[0] && price < pr[1]));
+      card.hidden = !ok; card.style.order = pos; if (ok) shown++;
+    });
+    noRes.hidden = shown > 0;
+    var filtered = q || wv || oc || pr;
+    document.getElementById('count').textContent = filtered ? 'Showing ' + shown + ' of ' + products.length + ' sarees' : products.length + ' sarees in this preview (the full store will have 50+)';
+    document.getElementById('clear-f').hidden = !filtered;
+  }
+  function clearFilters() { fq.value = ''; fw.value = ''; fo.value = ''; fp.value = ''; applyFilters(); }
+  [fq, fw, fo, fp, fs].forEach(function (el) { el.addEventListener(el === fq ? 'input' : 'change', applyFilters); });
+  document.getElementById('clear-f').addEventListener('click', clearFilters);
+  document.getElementById('clear-f2').addEventListener('click', clearFilters);
+  document.querySelectorAll('[data-weave]').forEach(function (a) {
+    a.addEventListener('click', function () { fq.value = ''; fo.value = ''; fp.value = ''; fw.value = a.dataset.weave; applyFilters(); });
+  });
+  document.getElementById('search-btn').addEventListener('click', function () {
+    document.getElementById('new').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () { fq.focus({ preventScroll: true }); }, 350);
+  });
+  applyFilters();
+
+  /* ---------- Product page ---------- */
+  var REVIEWS = [
+    ['Meena K.', 'Hyderabad', 5, 'Exactly like the photos. The zari is rich and the colour is even better in person.'],
+    ['Divya R.', 'Chennai', 5, 'Packed beautifully and arrived in 3 days. My mother loved it.'],
+    ['Kavya S.', 'Bengaluru', 4, 'Soft, light and easy to drape. Will order again for Ugadi.'],
+    ['Sunitha P.', 'Vijayawada', 5, 'Good quality for the price. The blouse piece matched perfectly.']
+  ];
+  var pdIdx = -1;
+  function openProduct(i) {
+    pdIdx = i; renderProduct(); openDlg('pd-dlg');
+    var b = document.getElementById('pd-body'); b.scrollTop = 0; document.getElementById('pd-dlg').scrollTop = 0;
+  }
+  function renderProduct() {
+    var i = pdIdx, p = products[i], j = sel[i], c = p.colors ? p.colors[j] : null, price = unit(p);
+    var thumbs = p.colors ? p.colors.map(function (x, k) { return '<button type="button" data-th="' + k + '" aria-pressed="' + (k === j) + '" aria-label="' + x.name + '"><img src="' + x.img + '" alt=""></button>'; }).join('') : '';
+    var sw = p.colors ? '<div><div class="muted" style="font-size:14px">Colour: <b style="color:var(--ink)">' + c.name + '</b></div><div class="pd-sw" role="group" aria-label="Choose a colour">' +
+      p.colors.map(function (x, k) { return '<button class="sw" type="button" data-th="' + k + '" aria-pressed="' + (k === j) + '" aria-label="Colour: ' + x.name + '" title="' + x.name + '"><span style="background:' + x.hex + '"></span></button>'; }).join('') + '</div></div>' : '';
+    var waText = encodeURIComponent('Hello Swasthik Veda, I would like to know more about saree ' + codeOf(p, j) + ' (' + p.name + (c ? ', ' + c.name : '') + ').');
+    var offer = trade ? '<div class="pd-offer">Wholesale price for <b>' + esc(trade.shop) + '</b>. Minimum ' + WS_MIN + ' pieces per order, any mix of designs.</div>'
+                      : '<div class="pd-offer"><b>New Year offer:</b> ' + inr(price * (1 - OFFER)) + ' in your bag (27% off*). New customers get a further 10% off with their welcome code.</div>';
+    var revs = [REVIEWS[i % 4], REVIEWS[(i + 1) % 4]];
+    document.getElementById('pd-body').innerHTML =
+      '<div class="pd-grid"><div class="pd-gal"><div class="pd-main"><img id="pd-img" src="' + imgOf(p, j) + '" alt="' + p.alt + (c ? ', ' + c.name : '') + '">' + (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') + '</div>' +
+      (thumbs ? '<div class="thumbs" aria-label="More photos">' + thumbs + '</div>' : '<p class="hint">More photos (full drape, pallu, border and blouse piece) will be added for each saree.</p>') + '</div>' +
+      '<div class="pd-info"><div class="weave-row"><span class="weave">' + p.weave + '</span><span class="pcode">Code: <b>' + codeOf(p, j) + '</b></span></div>' +
+      '<h3 class="display">' + p.name + '</h3>' +
+      '<div class="stars">' + stars(p.rating) + ' <small>' + p.rating + ' from ' + p.nrev + ' reviews</small></div>' +
+      '<div class="pd-price price">' + priceHtml(p) + '</div>' + offer + sw +
+      '<div class="pd-actions"><button class="btn solid" type="button" id="pd-add">Add to bag</button><a class="btn wa-btn" target="_blank" rel="noopener" href="https://wa.me/918555063040?text=' + waText + '">Ask on WhatsApp</a></div>' +
+      '<form class="pd-pin" id="pd-pin" novalidate><input id="pd-pin-in" inputmode="numeric" maxlength="6" placeholder="Check delivery: pincode" aria-label="Pincode" value="' + (pin || '') + '"><button class="btn line" type="submit">Check</button></form>' +
+      '<p class="pin-msg" id="pd-pin-msg" aria-live="polite"></p>' +
+      '<table class="spec"><tbody>' +
+      '<tr><th>Fabric</th><td>' + p.fabric + '</td></tr>' +
+      '<tr><th>Length</th><td>Saree 5.5 m, with a 0.8 m unstitched blouse piece</td></tr>' +
+      '<tr><th>Occasion</th><td>' + p.occ + '</td></tr>' +
+      '<tr><th>Care</th><td>Dry clean only. Store folded in a muslin cloth.</td></tr>' +
+      '<tr><th>Origin</th><td>Handwoven in India</td></tr>' +
+      '<tr><th>Silk Mark</th><td>To be confirmed for each saree</td></tr>' +
+      '</tbody></table>' +
+      '<div class="pd-links"><button type="button" data-go="ship-dlg">Shipping: dispatched in 1 to 3 business days</button><button type="button" data-go="returns-dlg">7-day returns and exchanges</button></div>' +
+      '<p class="hint">Sample details and prices for this preview.</p></div></div>' +
+      '<div class="pd-reviews"><h4>Reviews</h4>' + revs.map(function (r) { return '<div class="rv"><span class="stars">' + stars(r[2]) + '</span><span>' + r[3] + '</span><small><b>' + r[0] + '</b>, ' + r[1] + ' · verified buyer (sample)</small></div>'; }).join('') + '</div>';
+    if (pin) pdPin(pin);
+  }
+  function pdPin(code) {
+    var z = lookup(code), m = document.getElementById('pd-pin-msg');
+    if (!z) { m.className = 'pin-msg err'; m.textContent = 'Enter a valid 6-digit pincode, like 560049.'; return; }
+    m.className = 'pin-msg ok'; m.innerHTML = 'Delivery by <b>' + esc(z.dates) + '</b> · shipping ' + inr(z.cost) + ' (' + esc(z.name) + ')';
+  }
+  document.getElementById('pd-body').addEventListener('click', function (e) {
+    var t = e.target.closest('[data-th]');
+    if (t) { showColour(pdIdx, +t.dataset.th); renderProduct(); return; }
+    if (e.target.closest('#pd-add')) { addToBag(pdIdx); return; }
+    var g = e.target.closest('[data-go]');
+    if (g) { closeDlg(document.getElementById('pd-dlg')); openDlg(g.dataset.go); }
+  });
+  document.getElementById('pd-body').addEventListener('submit', function (e) {
+    e.preventDefault(); var v = document.getElementById('pd-pin-in').value.trim(); pdPin(v); if (lookup(v)) { applyPin(v, true); document.getElementById('pin-input').value = v; }
+  });
+  document.getElementById('pd-body').addEventListener('input', function (e) { if (e.target.id === 'pd-pin-in') e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6); });
+
+  /* ---------- Wholesale login (preview: demo shop only) ---------- */
+  var TRADE_DEMO = { phone: '9000000010', pw: 'demo123', shop: 'Lakshmi Silks', city: 'Vijayawada', owner: 'Ravi Kumar' };
+  function setTrade(t) {
+    trade = t; save('sv-trade', t ? t.phone : null);
+    products.forEach(function (p, i) { document.getElementById('price-' + i).innerHTML = priceHtml(p); });
+    var note = document.getElementById('trade-note');
+    note.hidden = !t;
+    note.innerHTML = t ? '<span>Showing wholesale prices for <b>' + esc(t.shop) + '</b> · minimum ' + WS_MIN + ' pieces per order</span><button type="button" id="trade-out">Sign out</button>' : '';
+    document.getElementById('trade-btn').textContent = t ? 'Wholesale account' : 'Wholesale login';
+    renderTrade(); applyFilters(); renderCart();
+  }
+  function renderTrade() {
+    var f = document.getElementById('trade-form'), inn = document.getElementById('trade-in');
+    f.hidden = !!trade; inn.hidden = !trade;
+    if (trade) inn.innerHTML = '<p>Signed in as <b>' + esc(trade.shop) + '</b>, ' + esc(trade.city) + '.</p>' +
+      '<ul style="margin:0;padding-left:20px;font-size:15px;line-height:1.6"><li>Wholesale price on every saree (about 40% below retail in this preview)</li><li>Minimum ' + WS_MIN + ' pieces per order, any mix of designs</li><li>Pay by bank transfer or UPI. Pay-later terms to be decided.</li></ul>' +
+      '<a class="btn solid" href="#new" id="trade-shop">Shop at wholesale prices</a><button class="btn line" type="button" id="trade-out2">Sign out</button><p class="hint">Sample terms for this preview.</p>';
+  }
+  document.getElementById('trade-demo').addEventListener('click', function () { document.getElementById('tr-shop-id').value = TRADE_DEMO.phone; document.getElementById('tr-shop-pw').value = TRADE_DEMO.pw; });
+  document.getElementById('tr-shop-id').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
+  document.getElementById('trade-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = document.getElementById('tr-shop-id').value, pw = document.getElementById('tr-shop-pw').value, m = document.getElementById('trade-msg');
+    if (id !== TRADE_DEMO.phone || pw !== TRADE_DEMO.pw) { m.textContent = 'That phone number and password don\'t match a registered shop. Use the demo shop account below.'; return; }
+    m.textContent = ''; setTrade(TRADE_DEMO); toast('Signed in as ' + TRADE_DEMO.shop + '. Wholesale prices are on.');
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#trade-out, #trade-out2')) { setTrade(null); toast('Signed out of the wholesale account'); }
+    if (e.target.closest('#trade-shop')) closeDlg(document.getElementById('trade-dlg'));
+  });
   document.getElementById('bag-btn').addEventListener('click', openCart);
   document.getElementById('cart-close').addEventListener('click', closeCart);
   document.getElementById('scrim').addEventListener('click', closeCart);
@@ -811,8 +1163,13 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
 
   function openDlg(id) { var d = document.getElementById(id); if (d && !d.open) { if (d.showModal) d.showModal(); else d.setAttribute('open', ''); } }
   function closeDlg(d) { if (d.close) d.close(); else d.removeAttribute('open'); }
-  document.querySelectorAll('[data-open]').forEach(function (b) {
-    b.addEventListener('click', function () { if (b.dataset.tab) showTab(b.dataset.tab); renderAccount(); openDlg(b.dataset.open); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-open]'); if (!b) return;
+    var d = b.closest('.dlg');
+    if (d && d.id !== b.dataset.open) closeDlg(d);
+    if (b.closest('#drawer')) closeCart();
+    if (b.dataset.tab) showTab(b.dataset.tab);
+    renderAccount(); if (b.dataset.open === 'trade-dlg') renderTrade(); openDlg(b.dataset.open);
   });
   document.querySelectorAll('.dlg').forEach(function (d) {
     d.addEventListener('click', function (e) { if (e.target === d || e.target.closest('[data-close]')) closeDlg(d); });
@@ -912,13 +1269,75 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     inp.value = '';
     renderCart();
   });
-  function checkout() {
-    if (!applied) { toast('Checkout opens when the store launches'); return; }
-    var a = me();
-    if (a && a.code && a.code.value === applied) { a.code.used = true; save('sv-accounts', accounts); }
-    toast('Preview: code ' + applied + ' marked as used. Checkout opens when the store launches.');
-    applied = null; document.getElementById('code-msg').textContent = ''; renderCart();
+  var orders = load('sv-orders', []);
+  function payOptions(t) {
+    var cod = !trade && t.total + COD_FEE <= COD_LIMIT;
+    var opts = [['upi', 'UPI', 'Google Pay, PhonePe, Paytm or any UPI app'], ['card', 'Debit or credit card', 'Visa, Mastercard, RuPay'], ['nb', 'Net banking', 'All major Indian banks']];
+    if (trade) opts.unshift(['neft', 'Bank transfer (NEFT or RTGS)', 'We send our bank details with the order confirmation']);
+    var h = opts.map(function (o, k) { return '<label><input type="radio" name="pay" value="' + o[0] + '"' + (k === 0 ? ' checked' : '') + '><span>' + o[1] + '<small>' + o[2] + '</small></span></label>'; }).join('');
+    if (!trade) h += '<label><input type="radio" name="pay" value="cod"' + (cod ? '' : ' disabled') + '><span>Cash on delivery (+' + inr(COD_FEE) + ')<small>' + (cod ? 'Pay when your saree arrives' : 'Available on orders up to ' + inr(COD_LIMIT)) + '</small></span></label>';
+    return h;
   }
+  function payNow() { var r = document.querySelector('#co-pay input:checked'); return r ? r.value : 'upi'; }
+  function renderCoSum() {
+    var t = totals(), cod = payNow() === 'cod' ? COD_FEE : 0;
+    document.getElementById('co-sum').innerHTML = '<h3>Your order</h3>' +
+      cart.map(function (x) { return '<div class="co-item"><span>' + x.qty + ' × ' + esc(x.code) + (x.colour ? ', ' + esc(x.colour) : '') + '</span><span>' + inr(unit(products[x.idx]) * x.qty) + '</span></div>'; }).join('') +
+      '<div style="border-top:1px solid var(--line);margin-top:4px"></div>' + sumRows(t, true) +
+      (cod ? '<div class="sum"><span>Cash on delivery fee</span><span>' + inr(cod) + '</span></div>' : '') +
+      '<div class="sum total"><span>Total to pay</span><span>' + inr(t.total + cod) + '</span></div><small class="muted">Prices include GST. A GST invoice comes with your parcel.</small>';
+  }
+  function checkout() {
+    var t = totals();
+    if (trade && t.count < WS_MIN) return;
+    closeCart();
+    var a = me();
+    document.getElementById('co-main').hidden = false; document.getElementById('co-done').hidden = true;
+    if (a) { document.getElementById('co-name').value = a.name; document.getElementById('co-phone').value = a.phone; document.getElementById('co-email').value = a.email; }
+    if (trade) { document.getElementById('co-name').value = trade.owner + ', ' + trade.shop; document.getElementById('co-phone').value = trade.phone; }
+    document.getElementById('co-pin').value = pin || '';
+    document.getElementById('co-pay').innerHTML = payOptions(t);
+    document.getElementById('co-msg').textContent = '';
+    renderCoSum(); openDlg('co-dlg');
+  }
+  document.getElementById('co-pay').addEventListener('change', renderCoSum);
+  ['co-phone', 'co-pin'].forEach(function (id) { document.getElementById(id).addEventListener('input', function (e) { var n = id === 'co-pin' ? 6 : 10; e.target.value = e.target.value.replace(/\D/g, '').slice(0, n); if (id === 'co-pin' && e.target.value.length === 6) { applyPin(e.target.value, true); document.getElementById('pin-input').value = e.target.value; document.getElementById('co-pay').innerHTML = payOptions(totals()); renderCoSum(); } }); });
+  document.getElementById('co-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var g = function (id) { return document.getElementById(id).value.trim(); }, m = document.getElementById('co-msg');
+    var n = g('co-name'), ph = g('co-phone'), em = g('co-email'), ad = g('co-addr'), city = g('co-city'), pc = g('co-pin'), st = g('co-state');
+    if (n.length < 2) { m.textContent = 'Please enter your full name.'; return; }
+    if (!/^[6-9][0-9]{9}$/.test(ph)) { m.textContent = 'Enter a 10-digit Indian mobile number.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { m.textContent = 'Enter a valid email address for your invoice.'; return; }
+    if (ad.length < 6) { m.textContent = 'Please enter your house number, street and area.'; return; }
+    if (city.length < 2) { m.textContent = 'Please enter your city.'; return; }
+    if (!lookup(pc)) { m.textContent = 'Enter a valid 6-digit pincode.'; return; }
+    if (!st) { m.textContent = 'Please choose your state.'; return; }
+    m.textContent = '';
+    var t = totals(), pay = payNow(), cod = pay === 'cod' ? COD_FEE : 0, total = t.total + cod;
+    var id = 'SV' + (1002 + orders.length);
+    orders.push({ id: id, phone: ph, items: cart.map(function (x) { return x.qty + ' × ' + x.code; }).join(', '), placed: Date.now(), dates: zone.dates });
+    save('sv-orders', orders);
+    var a = me();
+    if (!trade && applied && a && a.code && a.code.value === applied) { a.code.used = true; save('sv-accounts', accounts); }
+    var payLabel = { upi: 'UPI', card: 'Card', nb: 'Net banking', cod: 'Cash on delivery', neft: 'Bank transfer' }[pay];
+    var done = document.getElementById('co-done');
+    done.innerHTML = '<div class="tick"><svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>' +
+      '<h3 class="display" style="font-size:32px">Thank you, ' + esc(n.split(/[ ,]/)[0]) + '!</h3>' +
+      '<p>Your order <b>' + id + '</b> is placed. Total ' + inr(total) + ' by ' + payLabel + '.</p>' +
+      '<p>Expected delivery: <b>' + esc(zone.dates) + '</b> to ' + esc(city) + ' ' + esc(pc) + '.</p>' +
+      '<p class="muted">We\'ve sent the confirmation to +91 ' + ph.slice(0, 5) + ' ' + ph.slice(5) + ' and ' + esc(em) + '.' + (applied && !trade ? ' Your welcome code ' + esc(applied) + ' is now used.' : '') + '</p>' +
+      '<button class="btn solid" type="button" id="co-track">Track this order</button><button class="btn line" type="button" data-close>Continue shopping</button>' +
+      '<p class="hint">Preview: no payment was taken and nothing was sent. Track it with order ' + id + ' and the same mobile number.</p>';
+    document.getElementById('co-main').hidden = true; done.hidden = false;
+    document.getElementById('co-track').addEventListener('click', function () {
+      closeDlg(document.getElementById('co-dlg'));
+      document.getElementById('tr-id').value = id; document.getElementById('tr-phone').value = ph; document.getElementById('tr-result').innerHTML = ''; document.getElementById('tr-msg').textContent = '';
+      openDlg('track-dlg'); document.getElementById('track-form').requestSubmit();
+    });
+    cart.length = 0; applied = null; document.getElementById('code-msg').textContent = ''; document.getElementById('co-form').reset(); renderCart();
+    document.getElementById('co-dlg').scrollTop = 0;
+  });
   renderAccount();
 
   /* ---------- Contact form (preview: not sent anywhere) ---------- */
@@ -968,9 +1387,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     e.target.hidden = true; done.hidden = false; e.target.reset();
   });
 
-  document.querySelectorAll('.dlg [data-open]').forEach(function (b) {
-    b.addEventListener('click', function () { var d = b.closest('.dlg'); if (d && d.id !== b.dataset.open) closeDlg(d); });
-  });
+
 
   /* ---------- Track orders (preview sample) ---------- */
   document.getElementById('tr-phone').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
@@ -981,6 +1398,15 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     out.innerHTML = '';
     if (!/^SV\d{3,}$/.test(id)) { msg.textContent = 'Order numbers look like SV1001. You\'ll find yours in the confirmation SMS and email.'; return; }
     if (!/^[6-9][0-9]{9}$/.test(ph)) { msg.textContent = 'Enter the 10-digit mobile number used for the order.'; return; }
+    var placed = orders.find(function (o) { return o.id === id; });
+    if (placed) {
+      if (placed.phone !== ph) { msg.textContent = 'This mobile number doesn\'t match order ' + id + '.'; return; }
+      msg.textContent = '';
+      var ps = [['Order placed', when(placed.placed), 1], ['Packed at our Bengaluru store', 'Within 1 to 3 business days', 0], ['Shipped with courier', 'Tracking link by SMS and email', 0], ['Delivered', 'Expected ' + placed.dates, 0]];
+      out.innerHTML = '<p style="padding: 0 20px 10px; margin: 0"><b>Order ' + id + '</b> · ' + esc(placed.items) + '</p><ol class="timeline">' +
+        ps.map(function (x) { return '<li class="' + (x[2] ? 'done' : '') + '"><b>' + x[0] + '</b><small>' + x[1] + '</small></li>'; }).join('') + '</ol>';
+      return;
+    }
     if (id !== 'SV1001') { msg.textContent = 'We couldn\'t find order ' + id + ' for this number. Call us and we\'ll check.'; return; }
     msg.textContent = '';
     var d = function (n) { var x = new Date(); x.setDate(x.getDate() + n); return x.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }); };
@@ -989,6 +1415,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       steps.map(function (x) { return '<li class="' + (x[2] ? 'done' : '') + '"><b>' + x[0] + '</b><small>' + x[1] + '</small></li>'; }).join('') + '</ol>';
   });
 
+  if (load('sv-trade', null) === TRADE_DEMO.phone) setTrade(TRADE_DEMO);
   renderCart();
   try { var saved = localStorage.getItem('sv-pin'); if (saved) { document.getElementById('pin-input').value = saved; applyPin(saved, true); } } catch (e) {}
   document.getElementById('wishlist-btn').addEventListener('click', function () {
