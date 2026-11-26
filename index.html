@@ -153,6 +153,10 @@ address { font-style: normal; font-size: 14px; color: var(--muted); line-height:
 .foot nav { flex: 1 1 150px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
 .foot nav span { font-size: 12px; font-weight: 700; letter-spacing: .14em; }
 .foot nav a { text-decoration: none; padding-block: 4px; }
+.social { display: flex; align-items: center; gap: 8px; }
+.social span { font-size: 12px; font-weight: 700; letter-spacing: .14em; margin-right: 4px; }
+.social a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--maroon); color: var(--on-maroon); text-decoration: none; }
+.social a:hover { background: var(--maroon-dark); }
 form.news { display: flex; flex-direction: column; gap: 8px; max-width: 380px; }
 form.news label { font-weight: 700; font-size: 14px; }
 form.news .row { display: flex; gap: 8px; }
@@ -392,6 +396,11 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       <img src="img/logo-seal.png" alt="Swasthik Veda Weavers Collection" width="120" height="120" style="width: 120px; height: 120px">
       <i>Threads of tradition. Weaves of grace.</i>
       <address>#13, Sri Vari Nilaya, Murali Layout, Aduru, near HP Petrol Bunk, Bidarahalli Hobli, Virgonagar Post, Bangalore 560049, Karnataka<br>swasthikvedasilks@gmail.com<br>Sai: 85550 63040 · Venkat: 79890 77958</address>
+      <div class="social" aria-label="Follow us">
+        <span>Follow us</span>
+        <a href="#" data-toast="Facebook page link coming soon" aria-label="Swasthik Veda on Facebook"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a>
+        <a href="#" data-toast="Instagram page link coming soon" aria-label="Swasthik Veda on Instagram"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
       <form class="news" id="news" novalidate>
         <label for="news-email">Get new arrivals by email</label>
         <div class="row"><input id="news-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn solid" type="submit">Sign up</button></div>
