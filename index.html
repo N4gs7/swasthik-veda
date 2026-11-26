@@ -230,6 +230,17 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
 .demo-acc { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 12px; min-height: 44px; border: 1px solid var(--line); background: var(--cream); font: inherit; color: var(--ink); cursor: pointer; }
 .demo-acc:hover { border-color: var(--maroon); }
 .demo-acc small { color: var(--muted); font-size: 12px; }
+.foot-link { border: 0; background: transparent; padding: 4px 0; font: inherit; font-size: 14px; color: inherit; text-align: left; cursor: pointer; }
+.foot-link:hover { color: var(--maroon); text-decoration: underline; }
+.dlg.wide { width: min(560px, calc(100% - 24px)); }
+.prose h3 { margin: 10px 0 0; font-size: 16px; color: var(--maroon); }
+.prose p, .prose li { font-size: 15px; line-height: 1.55; }
+.prose ol, .prose ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.tbl { overflow-x: auto; }
+.tbl table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.tbl th, .tbl td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+.tbl th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.dlg textarea { padding: 10px 12px; border: 1px solid var(--muted); background: #FFFFFF; font: inherit; font-size: 16px; color: var(--ink); width: 100%; resize: vertical; }
 .code-card { border: 2px dashed var(--gold-text); background: #FFFFFF; padding: 14px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
 .code-card b.code { font-size: 26px; letter-spacing: .14em; color: var(--maroon); user-select: all; }
 .code-card.used, .code-card.expired { opacity: .6; }
@@ -412,7 +423,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       </form>
     </div>
     <nav aria-label="Shop"><span>SHOP</span><a href="#collections">Dharmavaram silk</a><a href="#collections">Mangalagiri cotton</a><a href="#collections">Pochampally silk</a><a href="#collections">Kanjivaram silk</a><a href="#collections">Banarasi silk</a><a href="#collections">Mysore silk</a><a href="#wholesale">Wholesale</a></nav>
-    <nav aria-label="Help"><span>HELP</span><a href="#top" data-toast="Shipping details coming soon">Shipping</a><a href="#top" data-toast="Returns details coming soon">Returns and exchanges</a><a href="#wholesale">Contact us</a></nav>
+    <nav aria-label="Help"><span>HELP</span><button type="button" class="foot-link" data-open="ship-dlg">Shipping</button><button type="button" class="foot-link" data-open="returns-dlg">Returns and exchanges</button><button type="button" class="foot-link" data-open="contact-dlg">Contact us</button><button type="button" class="foot-link" data-open="track-dlg">Track your order</button></nav>
   </div>
   <div class="legal"><div class="wrap"><span>© 2026 Swasthik Veda Weavers Collection. All prices in INR.</span><span>Sri Chowdeshwary Devi Prasanna</span></div><div class="wrap credits">Photos: Mangalagiri sarees by Durgarao Vuddanti (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>), Mysore silk saree by Kiranravikumar (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>), via Wikimedia Commons.</div></div>
 </footer>
@@ -497,6 +508,74 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     <p><b>Hours:</b> Monday to Saturday, 10 AM to 7 PM (sample hours)</p>
     <p class="muted">#13, Sri Vari Nilaya, Murali Layout, Aduru, Bidarahalli Hobli, Virgonagar Post, Bangalore 560049</p>
   </div>
+</dialog>
+
+<dialog class="dlg wide" id="ship-dlg" aria-labelledby="ship-title">
+  <div class="dlg-head"><h2 class="display" id="ship-title">Shipping</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="stack prose">
+    <p>We ship across India from our store in Bengaluru with a tracked courier. We pack and dispatch orders within 1 to 3 business days of payment. Sarees that need fall, pico or blouse stitching take an extra 3 to 5 business days.</p>
+    <h3>Charges and delivery times</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Delivering to</th><th>Charge</th><th>Delivery</th></tr></thead>
+      <tbody>
+        <tr><td>Bengaluru</td><td>₹49</td><td>1 to 2 days</td></tr>
+        <tr><td>Rest of Karnataka</td><td>₹79</td><td>2 to 3 days</td></tr>
+        <tr><td>South India (AP, Telangana, TN, Kerala)</td><td>₹99</td><td>3 to 5 days</td></tr>
+        <tr><td>Metro cities</td><td>₹129</td><td>3 to 5 days</td></tr>
+        <tr><td>Rest of India</td><td>₹149</td><td>4 to 7 days</td></tr>
+        <tr><td>North-East, J&amp;K, Andaman</td><td>₹199</td><td>6 to 10 days</td></tr>
+      </tbody>
+    </table></div>
+    <p>Delivery times are estimates in business days, not counting Sundays and public holidays. The exact shipping charge is shown in the bag before you pay, never added later. Enter your pincode there to see it.</p>
+    <h3>Tracking</h3>
+    <p>Once your order ships, we send a tracking link by email and SMS. You can also use <b>Track Orders</b> at the top of the page.</p>
+    <h3>Receiving your parcel</h3>
+    <p>Please don't accept a parcel that looks opened or tampered with. We recommend recording an unboxing video. It isn't required, but it helps us resolve a claim faster.</p>
+    <h3>Cancelling an order</h3>
+    <p>You can cancel free of charge any time before your order is dispatched.</p>
+    <h3>Shipping outside India</h3>
+    <p>We currently ship within India only. Worldwide shipping is coming soon.</p>
+    <p class="hint">Draft wording from our store policies. Rates are samples until the courier partner is chosen.</p>
+  </div>
+</dialog>
+
+<dialog class="dlg wide" id="returns-dlg" aria-labelledby="ret-title">
+  <div class="dlg-head"><h2 class="display" id="ret-title">Returns and exchanges</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="stack prose">
+    <h3>7-day returns</h3>
+    <p>You can return or exchange an eligible saree within 7 days of delivery. Silk sarees are delicate, so they must come back unused, with the original tags and packaging.</p>
+    <h3>Damaged or wrong item</h3>
+    <p>Tell us within 48 hours of delivery, with photos or the unboxing video. You get a free replacement or a full refund, including shipping.</p>
+    <p>Small colour differences between your screen and the fabric, and small irregularities in weave or zari, are natural in handloom silk and are not defects.</p>
+    <h3>How to start a return</h3>
+    <ol>
+      <li>Use <b>Contact us</b> below, email swasthikvedasilks@gmail.com or WhatsApp +91 85550 63040 with your order number.</li>
+      <li>Send photos of the saree, the tags and the packaging. We reply within 48 hours.</li>
+      <li>If approved, we arrange a free pickup. We check the saree within 2 business days of it reaching us.</li>
+    </ol>
+    <h3>Refunds</h3>
+    <p>Prepaid orders are refunded to the original payment method. Cash on delivery orders are refunded to your bank account or UPI, or as store credit if you prefer. We start the refund within 2 business days of approving the return, and banks usually take 5 to 7 business days to credit it.</p>
+    <h3>Exchanges</h3>
+    <p>Exchange for another saree of equal value, or pay the difference for a higher-priced one.</p>
+    <h3>Not returnable</h3>
+    <ul><li>Sarees that have been worn, washed, dry-cleaned or altered</li><li>Sarees with fall, pico or blouse stitching done at your request</li><li>Sarees without the original tags and packaging</li><li>Items marked final sale, unless they arrive damaged or wrong</li></ul>
+    <p class="hint">Draft wording from our store policies (7 days and 48 hours are suggested values). To be confirmed before launch.</p>
+    <button class="btn solid" type="button" data-open="contact-dlg">Start a return</button>
+  </div>
+</dialog>
+
+<dialog class="dlg" id="contact-dlg" aria-labelledby="ct-title">
+  <div class="dlg-head"><h2 class="display" id="ct-title">Contact us</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <form class="stack" id="contact-form" novalidate>
+    <p>Send us your question and we'll reply within 1 working day. For anything urgent, call 85550 63040.</p>
+    <label for="ct-name">Name</label><input id="ct-name" autocomplete="name">
+    <label for="ct-phone">Mobile number</label><div class="phone-in"><span>+91</span><input id="ct-phone" inputmode="numeric" maxlength="10" autocomplete="tel-national"></div>
+    <label for="ct-email">Email</label><input id="ct-email" type="email" autocomplete="email">
+    <label for="ct-query">Your query</label><textarea id="ct-query" rows="4" maxlength="1000" placeholder="Order number, saree name or anything we should know"></textarea>
+    <p class="form-msg" id="ct-msg" aria-live="polite"></p>
+    <button class="btn solid" type="submit">Send</button>
+  </form>
+  <div id="ct-done" class="stack" hidden></div>
 </dialog>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -799,6 +878,29 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     applied = null; document.getElementById('code-msg').textContent = ''; renderCart();
   }
   renderAccount();
+
+  /* ---------- Contact form (preview: not sent anywhere) ---------- */
+  document.getElementById('ct-phone').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var n = document.getElementById('ct-name').value.trim(), ph = document.getElementById('ct-phone').value, em = document.getElementById('ct-email').value.trim(),
+        q = document.getElementById('ct-query').value.trim(), msg = document.getElementById('ct-msg');
+    if (n.length < 2) { msg.textContent = 'Please enter your name.'; return; }
+    if (!/^[6-9][0-9]{9}$/.test(ph)) { msg.textContent = 'Enter a 10-digit Indian mobile number.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { msg.textContent = 'Enter a valid email address.'; return; }
+    if (q.length < 10) { msg.textContent = 'Please tell us a little more about your query.'; return; }
+    msg.textContent = '';
+    var ref = 'SVQ' + String(Date.now()).slice(-5);
+    var done = document.getElementById('ct-done');
+    done.innerHTML = '<p><b>Thank you, ' + esc(n.split(' ')[0]) + '.</b> We\'ve received your query. Your reference is <b>' + ref + '</b>.</p>' +
+      '<p>We\'ll reply by phone or email within 1 working day.</p><p class="hint">Preview: in the live store this goes to swasthikvedasilks@gmail.com. Nothing was sent from this demo.</p>' +
+      '<button class="btn line" type="button" id="ct-again">Send another query</button>';
+    e.target.hidden = true; done.hidden = false; e.target.reset();
+    document.getElementById('ct-again').addEventListener('click', function () { done.hidden = true; e.target.hidden = false; });
+  });
+  document.querySelectorAll('.dlg [data-open]').forEach(function (b) {
+    b.addEventListener('click', function () { var d = b.closest('.dlg'); if (d && d.id !== b.dataset.open) closeDlg(d); });
+  });
 
   /* ---------- Track orders (preview sample) ---------- */
   document.getElementById('tr-phone').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
