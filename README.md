@@ -10,6 +10,7 @@ What works in the demo:
 - Bag with pincode-based shipping and delivery dates (sample rates)
 - Sign up / sign in with a one-time first-order code (10%, 3-day validity, one code per order)
 - Track Orders (try SV1001) and Customer Support
+- Demo accounts (password demo123): 9000000001 new customer with code ready, 9000000002 code used, 9000000003 code expired
 
 This is a preview: prices, shipping rates and policies are samples, and accounts and bags are stored only in each visitor's browser. No real payments, SMS or email.
 

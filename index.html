@@ -226,6 +226,10 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
 .perk { background: var(--sand); padding: 10px 12px; font-size: 14px; }
 .linkish { border: 0; background: transparent; color: var(--maroon); text-decoration: underline; font: inherit; font-size: 14px; cursor: pointer; min-height: 40px; }
 .hint, .muted { color: var(--muted); font-size: 13px; }
+.demo-box { margin-top: 10px; padding: 12px; background: var(--sand); display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.demo-acc { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 12px; min-height: 44px; border: 1px solid var(--line); background: var(--cream); font: inherit; color: var(--ink); cursor: pointer; }
+.demo-acc:hover { border-color: var(--maroon); }
+.demo-acc small { color: var(--muted); font-size: 12px; }
 .code-card { border: 2px dashed var(--gold-text); background: #FFFFFF; padding: 14px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
 .code-card b.code { font-size: 26px; letter-spacing: .14em; color: var(--maroon); user-select: all; }
 .code-card.used, .code-card.expired { opacity: .6; }
@@ -448,6 +452,13 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       <p class="form-msg" id="si-msg" aria-live="polite"></p>
       <button class="btn solid" type="submit">Sign in</button>
       <button class="linkish" type="button" id="si-forgot">Forgot password?</button>
+      <div class="demo-box">
+        <p><b>Demo accounts for review</b> · tap one to fill it in, then Sign in. Password for all: <b>demo123</b></p>
+        <button type="button" class="demo-acc" data-id="9000000001"><b>Priya Sharma</b><small>90000 00001 · new customer, welcome code ready</small></button>
+        <button type="button" class="demo-acc" data-id="9000000002"><b>Lakshmi Rao</b><small>90000 00002 · returning customer, code already used</small></button>
+        <button type="button" class="demo-acc" data-id="9000000003"><b>Anitha Reddy</b><small>90000 00003 · code expired after 3 days</small></button>
+        <small class="hint">Demo accounts reset each time the page is reloaded.</small>
+      </div>
     </form>
     <form class="stack" id="signup-form" role="tabpanel" aria-labelledby="tab-signup" novalidate hidden>
       <p class="perk">Get <b>10% off your first order</b> with a one-time code sent to your phone and email. Valid for 3 days.*</p>
@@ -659,6 +670,16 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   function load(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
   function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   var accounts = load('sv-accounts', []), userKey = load('sv-user', null);
+  (function seedDemo() {
+    var now = Date.now(), day = 864e5, pw = hash('demo123');
+    var demo = [
+      { name: 'Priya Sharma', phone: '9000000001', email: 'priya@demo.in', pw: pw, demo: true, code: { value: 'SVNEWDEMO', issued: now, expires: now + CODE_DAYS * day, used: false } },
+      { name: 'Lakshmi Rao', phone: '9000000002', email: 'lakshmi@demo.in', pw: pw, demo: true, code: { value: 'SVNEWUSED', issued: now - 2 * day, expires: now + day, used: true } },
+      { name: 'Anitha Reddy', phone: '9000000003', email: 'anitha@demo.in', pw: pw, demo: true, code: { value: 'SVNEWOLD1', issued: now - 5 * day, expires: now - 2 * day, used: false } }
+    ];
+    accounts = accounts.filter(function (a) { return !a.demo; }).concat(demo);
+    save('sv-accounts', accounts);
+  })();
   function me() { return accounts.find(function (a) { return a.phone === userKey; }) || null; }
   function hash(t) { var h = 0; for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) | 0; return String(h); }
   function newCode() { var c = 'SVNEW', abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; for (var i = 0; i < 4; i++) c += abc[Math.floor(Math.random() * abc.length)]; return c; }
@@ -685,6 +706,9 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   }
   document.getElementById('tab-signin').addEventListener('click', function () { showTab('signin'); });
   document.getElementById('tab-signup').addEventListener('click', function () { showTab('signup'); });
+  document.querySelectorAll('.demo-acc').forEach(function (b) {
+    b.addEventListener('click', function () { document.getElementById('si-id').value = b.dataset.id; document.getElementById('si-pw').value = 'demo123'; document.getElementById('si-msg').textContent = ''; });
+  });
   document.getElementById('si-forgot').addEventListener('click', function () { document.getElementById('si-msg').textContent = 'Password reset by SMS or email opens when the store launches.'; });
 
   function codeCard(a, fresh) {
