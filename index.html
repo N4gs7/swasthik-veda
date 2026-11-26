@@ -136,9 +136,9 @@ section.block .wrap { padding-block: 64px 24px; }
 .card h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; }
 .colour-label { font-size: 13px; color: var(--muted); }
 .colour-label strong { color: var(--ink); }
-.swatches { display: flex; flex-wrap: wrap; margin-left: -6px; }
+.swatches { position: absolute; right: 8px; top: 60px; display: flex; flex-direction: column; align-items: center; padding: 4px 0; background: rgba(251,245,232,.88); border-radius: 26px; box-shadow: 0 1px 4px rgba(0,0,0,.18); max-height: calc(100% - 72px); overflow-y: auto; scrollbar-width: none; }
 .sw { width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
-.sw span { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(0,0,0,.25); outline: 2px solid transparent; outline-offset: 2px; }
+.sw span { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.25); outline: 2px solid transparent; outline-offset: 2px; }
 .sw[aria-pressed="true"] span { outline-color: var(--maroon); }
 .price { display: flex; align-items: baseline; gap: 10px; }
 .price b { font-size: 19px; }
@@ -719,18 +719,19 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   function codeOf(p, j) { return p.colors ? p.code + '-' + String(j + 1).padStart(2, '0') : p.code; }
   products.forEach(function (p, i) {
     var card = document.createElement('article'); card.className = 'card';
-    var first = p.colors ? p.colors[0] : null;
+    var first = p.colors ? p.colors[0] : null, sws = '';
+    if (p.colors) {
+      sws = '<div class="swatches" role="group" aria-label="Choose a colour">';
+      p.colors.forEach(function (c, j) {
+        sws += '<button class="sw" type="button" data-p="' + i + '" data-c="' + j + '" aria-pressed="' + (j === 0) + '" aria-label="Colour: ' + c.name + '" title="' + c.name + '"><span style="background:' + c.hex + '"></span></button>';
+      });
+      sws += '</div>';
+    }
     var html = '<div class="ph"><img id="img-' + i + '" src="' + (first ? first.img : p.img) + '" alt="' + p.alt + (first ? ', ' + first.name : '') + '" loading="lazy">' +
       (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
-      '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button></div>' +
+      '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button>' + sws + '</div>' +
       '<div class="weave-row"><span class="weave">' + p.weave + '</span><span class="pcode">Code: <b id="code-' + i + '">' + codeOf(p, 0) + '</b></span></div>';
-    if (p.colors) {
-      html += '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong> · ' + p.colors.length + ' colours</div><div class="swatches" role="group" aria-label="Choose a colour">';
-      p.colors.forEach(function (c, j) {
-        html += '<button class="sw" type="button" data-p="' + i + '" data-c="' + j + '" aria-pressed="' + (j === 0) + '" aria-label="Colour: ' + c.name + '" title="' + c.name + '"><span style="background:' + c.hex + '"></span></button>';
-      });
-      html += '</div>';
-    }
+    if (p.colors) html += '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong> · ' + p.colors.length + ' colours</div>';
     html += '<h3>' + p.name + '</h3><div class="price"><b>' + p.price + '</b><small>incl. GST</small></div>' +
       '<button class="btn line add" type="button" data-p="' + i + '">Add to bag</button>';
     card.innerHTML = html;
