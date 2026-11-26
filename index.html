@@ -122,6 +122,17 @@ section.block .wrap { padding-block: 64px 24px; }
 .wish[aria-pressed="true"] { color: var(--maroon); }
 .wish[aria-pressed="true"] path { fill: var(--maroon); }
 .weave { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--gold-text); }
+.weave-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; }
+.pcode { font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+.pcode b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.wa-btn { background: #1F7A4D; border-color: #1F7A4D; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.checks { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.checks label { display: flex; align-items: center; gap: 8px; font-weight: 400; min-height: 36px; }
+.checks input { width: 18px; height: 18px; accent-color: var(--maroon); }
+.wa-preview { background: #E7DDCB; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.wa-bubble { background: #fff; color: #1b1b1b; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.5; max-width: 92%; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+.wa-bubble .doc { display: flex; gap: 10px; align-items: center; background: #F2ECE0; padding: 8px 10px; border-radius: 6px; margin: 6px 0; font-weight: 700; }
+.wa-bubble small { display: block; text-align: right; color: #777; font-size: 11px; }
 .card h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; }
 .colour-label { font-size: 13px; color: var(--muted); }
 .colour-label strong { color: var(--ink); }
@@ -240,6 +251,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
 .tbl table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
 .tbl th, .tbl td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
 .tbl th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.dlg select { padding: 10px 12px; border: 1px solid var(--muted); background: #FFFFFF; font: inherit; font-size: 16px; color: var(--ink); width: 100%; min-height: 44px; }
 .dlg textarea { padding: 10px 12px; border: 1px solid var(--muted); background: #FFFFFF; font: inherit; font-size: 16px; color: var(--ink); width: 100%; resize: vertical; }
 .code-card { border: 2px dashed var(--gold-text); background: #FFFFFF; padding: 14px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
 .code-card b.code { font-size: 26px; letter-spacing: .14em; color: var(--maroon); user-select: all; }
@@ -395,7 +407,8 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       <img src="img/p5.jpg" alt="Stacked rolls of jacquard silk in many colours" loading="lazy">
       <div class="txt">
         <h2 class="display">Buying for your shop?</h2>
-        <p>Swasthik Veda is a trusted wholesale supplier of quality weaves at the best prices. Call us for bulk rates and the latest collections.</p>
+        <p>Swasthik Veda is a trusted wholesale supplier of quality weaves at the best prices. Get our wholesale catalog with product codes and bulk rates on WhatsApp, or call us.</p>
+        <div><button class="btn wa-btn" type="button" data-open="ws-dlg"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>Get the catalog on WhatsApp</button></div>
         <div class="phones">
           <a class="phone" href="tel:+918555063040"><small>SAI</small><b>85550 63040</b></a>
           <a class="phone" href="tel:+917989077958"><small>VENKAT</small><b>79890 77958</b></a>
@@ -578,14 +591,39 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
   <div id="ct-done" class="stack" hidden></div>
 </dialog>
 
+<dialog class="dlg" id="ws-dlg" aria-labelledby="ws-title">
+  <div class="dlg-head"><h2 class="display" id="ws-title">Wholesale catalog</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <form class="stack" id="ws-form" novalidate>
+    <p>Tell us about your shop and we'll send our latest wholesale catalog, with product codes and bulk rates, straight to your WhatsApp.</p>
+    <label for="ws-name">Your name</label><input id="ws-name" autocomplete="name">
+    <label for="ws-shop">Shop or business name</label><input id="ws-shop" autocomplete="organization">
+    <label for="ws-city">City</label><input id="ws-city" autocomplete="address-level2">
+    <label for="ws-phone">WhatsApp number</label><div class="phone-in"><span>+91</span><input id="ws-phone" inputmode="numeric" maxlength="10" autocomplete="tel-national"></div>
+    <fieldset class="stack" style="border:0;padding:0;margin:0"><legend style="font-weight:700;margin-bottom:4px">Weaves you're interested in</legend>
+      <div class="checks">
+        <label><input type="checkbox" name="ws-weave" value="Dharmavaram silk">Dharmavaram</label>
+        <label><input type="checkbox" name="ws-weave" value="Mangalagiri cotton">Mangalagiri</label>
+        <label><input type="checkbox" name="ws-weave" value="Pochampally silk">Pochampally</label>
+        <label><input type="checkbox" name="ws-weave" value="Kanjivaram silk">Kanjivaram</label>
+        <label><input type="checkbox" name="ws-weave" value="Banarasi silk">Banarasi</label>
+        <label><input type="checkbox" name="ws-weave" value="Mysore silk">Mysore</label>
+      </div></fieldset>
+    <label for="ws-qty">Typical order size</label>
+    <select id="ws-qty"><option>10 to 25 sarees</option><option>25 to 50 sarees</option><option>50 to 100 sarees</option><option>More than 100 sarees</option></select>
+    <p class="form-msg" id="ws-msg" aria-live="polite"></p>
+    <button class="btn wa-btn" type="submit">Send me the catalog</button>
+  </form>
+  <div id="ws-done" class="stack" hidden></div>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
   var products = [
-    { weave: 'SOFT SILK', name: 'Jacquard soft silk, assorted festive colours', price: '₹6,450', tag: 'NEW', img: 'img/p1.jpg', alt: 'Rolls of jacquard silk in purple, pink, orange, blue and green' },
-    { weave: 'BANARASI', name: 'Georgette with gold zari buta, teal blue', price: '₹9,200', img: 'img/p2.jpg', alt: 'Teal blue Banarasi saree with gold zari buta' },
-    { weave: 'BANARASI', name: 'Banarasi silk with contrast zari border', price: '₹14,500', tag: 'BESTSELLER', alt: 'Banarasi silk saree with a wide contrast zari border', colors: [
+    { code: 'SV-SFT-101', weave: 'SOFT SILK', name: 'Jacquard soft silk, assorted festive colours', price: '₹6,450', tag: 'NEW', img: 'img/p1.jpg', alt: 'Rolls of jacquard silk in purple, pink, orange, blue and green' },
+    { code: 'SV-BNR-201', weave: 'BANARASI', name: 'Georgette with gold zari buta, teal blue', price: '₹9,200', img: 'img/p2.jpg', alt: 'Teal blue Banarasi saree with gold zari buta' },
+    { code: 'SV-BNR-202', weave: 'BANARASI', name: 'Banarasi silk with contrast zari border', price: '₹14,500', tag: 'BESTSELLER', alt: 'Banarasi silk saree with a wide contrast zari border', colors: [
       { name: 'Peach + Maroon', hex: '#F4A582', img: 'img/p3.jpg' },
       { name: 'Ivory + Kumkum Red', hex: '#F3E9D2', img: 'img/a1.jpg' },
       { name: 'Peacock Teal + Brinjal', hex: '#0F6B6E', img: 'img/a2.jpg' },
@@ -593,15 +631,15 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       { name: 'Blush + Wine', hex: '#F2B8C0', img: 'img/a4.jpg' },
       { name: 'Powder Blue + Navy', hex: '#A9CFEA', img: 'img/a5.jpg' },
       { name: 'Lilac + Plum', hex: '#C9A6E3', img: 'img/a6.jpg' } ] },
-    { weave: 'BANARASI', name: 'Georgette with gold zari buta', price: '₹9,200', alt: 'Banarasi georgette saree with gold zari buta', colors: [
+    { code: 'SV-BNR-203', weave: 'BANARASI', name: 'Georgette with gold zari buta', price: '₹9,200', alt: 'Banarasi georgette saree with gold zari buta', colors: [
       { name: 'Emerald Green', hex: '#1D5E3A', img: 'img/b1.jpg' },
       { name: 'Kumkum Maroon', hex: '#7E1A2C', img: 'img/b2.jpg' },
       { name: 'Rani Pink', hex: '#B5156B', img: 'img/b3.jpg' },
       { name: 'Aubergine', hex: '#4F1D4F', img: 'img/b4.jpg' },
       { name: 'Turmeric Mustard', hex: '#C08A1A', img: 'img/b5.jpg' },
       { name: 'Dusty Rose', hex: '#A85A6A', img: 'img/b6.jpg' } ] },
-    { weave: 'JACQUARD SILK', name: 'Paisley jacquard silk, choose your colour', price: '₹7,800', img: 'img/p5.jpg', alt: 'Stacked rolls of paisley jacquard silk in many colours' },
-    { weave: 'KANJIVARAM', name: 'Pure silk with zari border, assorted colours', price: '₹18,900', tag: 'NEW', img: 'img/p6.jpg', alt: 'Folded silk sarees with gold zari borders on a shelf' }
+    { code: 'SV-JQD-301', weave: 'JACQUARD SILK', name: 'Paisley jacquard silk, choose your colour', price: '₹7,800', img: 'img/p5.jpg', alt: 'Stacked rolls of paisley jacquard silk in many colours' },
+    { code: 'SV-KAN-401', weave: 'KANJIVARAM', name: 'Pure silk with zari border, assorted colours', price: '₹18,900', tag: 'NEW', img: 'img/p6.jpg', alt: 'Folded silk sarees with gold zari borders on a shelf' }
   ];
   var heart = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
   var grid = document.getElementById('grid');
@@ -648,7 +686,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       foot.hidden = true; return;
     }
     body.innerHTML = cart.map(function (x, i) {
-      return '<div class="line-item"><img src="' + x.img + '" alt=""><div><b>' + esc(x.name) + '</b>' + (x.colour ? '<small>Colour: ' + esc(x.colour) + '</small>' : '') +
+      return '<div class="line-item"><img src="' + x.img + '" alt=""><div><b>' + esc(x.name) + '</b><small>Code: ' + esc(x.code) + '</small>' + (x.colour ? '<small>Colour: ' + esc(x.colour) + '</small>' : '') +
         '<div class="li-row"><div class="qty"><button type="button" data-act="dec" data-i="' + i + '" aria-label="One less">−</button><span aria-label="Quantity">' + x.qty + '</span><button type="button" data-act="inc" data-i="' + i + '" aria-label="One more">+</button></div>' +
         '<span class="li-price">' + inr(x.price * x.qty) + '</span></div><button class="remove" type="button" data-act="rm" data-i="' + i + '">Remove</button></div></div>';
     }).join('');
@@ -678,13 +716,14 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     document.getElementById(btnId).setAttribute('aria-label', label + ', ' + n + (n === 1 ? ' item' : ' items'));
   }
 
+  function codeOf(p, j) { return p.colors ? p.code + '-' + String(j + 1).padStart(2, '0') : p.code; }
   products.forEach(function (p, i) {
     var card = document.createElement('article'); card.className = 'card';
     var first = p.colors ? p.colors[0] : null;
     var html = '<div class="ph"><img id="img-' + i + '" src="' + (first ? first.img : p.img) + '" alt="' + p.alt + (first ? ', ' + first.name : '') + '" loading="lazy">' +
       (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
       '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button></div>' +
-      '<div class="weave">' + p.weave + '</div>';
+      '<div class="weave-row"><span class="weave">' + p.weave + '</span><span class="pcode">Code: <b id="code-' + i + '">' + codeOf(p, 0) + '</b></span></div>';
     if (p.colors) {
       html += '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong> · ' + p.colors.length + ' colours</div><div class="swatches" role="group" aria-label="Choose a colour">';
       p.colors.forEach(function (c, j) {
@@ -705,6 +744,7 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
       var img = document.getElementById('img-' + sw.dataset.p);
       img.src = c.img; img.alt = p.alt + ', ' + c.name;
       document.getElementById('cname-' + sw.dataset.p).textContent = c.name;
+      document.getElementById('code-' + sw.dataset.p).textContent = codeOf(p, +sw.dataset.c);
       sw.parentNode.querySelectorAll('.sw').forEach(function (b) { b.setAttribute('aria-pressed', String(b === sw)); });
       return;
     }
@@ -719,12 +759,12 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     var a = e.target.closest('.add');
     if (a) {
       var idx = +a.dataset.p, pr = products[idx], nameEl = document.getElementById('cname-' + idx);
-      var colour = nameEl ? nameEl.textContent : '', key = idx + '|' + colour;
+      var colour = nameEl ? nameEl.textContent : '', code = document.getElementById('code-' + idx).textContent, key = code;
       var found = cart.find(function (x) { return x.key === key; });
       if (found) found.qty += 1;
-      else cart.push({ key: key, name: pr.name, colour: colour, price: toNum(pr.price), img: document.getElementById('img-' + idx).getAttribute('src'), qty: 1 });
+      else cart.push({ key: key, code: code, name: pr.name, colour: colour, price: toNum(pr.price), img: document.getElementById('img-' + idx).getAttribute('src'), qty: 1 });
       renderCart();
-      toast('Added to bag: ' + pr.name + (colour ? ' (' + colour + ')' : ''));
+      toast('Added to bag: ' + code + (colour ? ' (' + colour + ')' : ''));
     }
   });
 
@@ -898,6 +938,34 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     e.target.hidden = true; done.hidden = false; e.target.reset();
     document.getElementById('ct-again').addEventListener('click', function () { done.hidden = true; e.target.hidden = false; });
   });
+  /* ---------- Wholesale catalog on WhatsApp (preview: simulated) ---------- */
+  var WA_NUMBER = '918555063040';
+  document.querySelector('.wholesale [data-open=ws-dlg]').addEventListener('click', function () { document.getElementById('ws-form').hidden = false; document.getElementById('ws-done').hidden = true; });
+  document.getElementById('ws-phone').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
+  document.getElementById('ws-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var g = function (id) { return document.getElementById(id).value.trim(); };
+    var n = g('ws-name'), shop = g('ws-shop'), city = g('ws-city'), ph = g('ws-phone'), qty = g('ws-qty'), msg = document.getElementById('ws-msg');
+    var weaves = Array.prototype.map.call(document.querySelectorAll('input[name=ws-weave]:checked'), function (c) { return c.value; });
+    if (n.length < 2) { msg.textContent = 'Please enter your name.'; return; }
+    if (shop.length < 2) { msg.textContent = 'Please enter your shop or business name.'; return; }
+    if (city.length < 2) { msg.textContent = 'Please enter your city.'; return; }
+    if (!/^[6-9][0-9]{9}$/.test(ph)) { msg.textContent = 'Enter a 10-digit WhatsApp number.'; return; }
+    msg.textContent = '';
+    var first = esc(n.split(' ')[0]), list = weaves.length ? weaves.join(', ') : 'all weaves';
+    var text = 'Hello Swasthik Veda, I am ' + n + ' from ' + shop + ', ' + city + '. Please send me your wholesale catalog. Interested in: ' + list + '. Typical order: ' + qty + '.';
+    var done = document.getElementById('ws-done');
+    done.innerHTML = '<p><b>Thank you, ' + first + '.</b> Your catalog is on its way to WhatsApp <b>+91 ' + ph.slice(0, 5) + ' ' + ph.slice(5) + '</b>.</p>' +
+      '<p>This is the message you would receive:</p>' +
+      '<div class="wa-preview" aria-label="Sample WhatsApp message"><div class="wa-bubble">Namaste ' + first + ' 🙏 Thank you for your interest in Swasthik Veda Weavers Collection.<br>Here is our latest wholesale catalog (' + esc(list) + '). Every saree has a product code. Reply with the codes and quantities you need and we\'ll send bulk rates.' +
+      '<div class="doc"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A3142B" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>SV-Wholesale-Catalog.pdf</div>' +
+      'Sai 85550 63040 · Venkat 79890 77958<small>now</small></div></div>' +
+      '<p>You can also message us now and we\'ll reply in working hours.</p>' +
+      '<a class="btn wa-btn" target="_blank" rel="noopener" href="https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text) + '">Chat with us on WhatsApp</a>' +
+      '<p class="hint">Preview: nothing was sent from this demo. In the live store, this form triggers the WhatsApp message automatically.</p>';
+    e.target.hidden = true; done.hidden = false; e.target.reset();
+  });
+
   document.querySelectorAll('.dlg [data-open]').forEach(function (b) {
     b.addEventListener('click', function () { var d = b.closest('.dlg'); if (d && d.id !== b.dataset.open) closeDlg(d); });
   });
