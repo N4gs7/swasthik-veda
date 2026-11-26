@@ -134,7 +134,8 @@ section.block .wrap { padding-block: 64px 24px; }
 .wa-bubble .doc { display: flex; gap: 10px; align-items: center; background: #F2ECE0; padding: 8px 10px; border-radius: 6px; margin: 6px 0; font-weight: 700; }
 .wa-bubble small { display: block; text-align: right; color: #777; font-size: 11px; }
 .card h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; }
-.colour-label { font-size: 13px; color: var(--muted); }
+.colour-label { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 80px); font-size: 13px; color: var(--ink); background: rgba(251,245,232,.92); padding: 6px 12px; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+.card .add { margin-top: auto; }
 .colour-label strong { color: var(--ink); }
 .swatches { position: absolute; right: 8px; top: 60px; display: flex; flex-direction: column; align-items: center; padding: 4px 0; background: rgba(251,245,232,.88); border-radius: 26px; box-shadow: 0 1px 4px rgba(0,0,0,.18); max-height: calc(100% - 72px); overflow-y: auto; scrollbar-width: none; }
 .sw { width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
@@ -729,9 +730,9 @@ form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-he
     }
     var html = '<div class="ph"><img id="img-' + i + '" src="' + (first ? first.img : p.img) + '" alt="' + p.alt + (first ? ', ' + first.name : '') + '" loading="lazy">' +
       (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
-      '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button>' + sws + '</div>' +
+      '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button>' + sws +
+      (p.colors ? '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong></div>' : '') + '</div>' +
       '<div class="weave-row"><span class="weave">' + p.weave + '</span><span class="pcode">Code: <b id="code-' + i + '">' + codeOf(p, 0) + '</b></span></div>';
-    if (p.colors) html += '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong> · ' + p.colors.length + ' colours</div>';
     html += '<h3>' + p.name + '</h3><div class="price"><b>' + p.price + '</b><small>incl. GST</small></div>' +
       '<button class="btn line add" type="button" data-p="' + i + '">Add to bag</button>';
     card.innerHTML = html;
