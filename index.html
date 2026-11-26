@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Swasthik Veda Weavers Collection: silk sarees from Bengaluru. Demo store for review.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Swasthik Veda Weavers Collection (demo)">
+<meta property="og:description" content="Preview of our upcoming online saree store. Tap to try it.">
+<meta property="og:image" content="https://n4gs7.github.io/swasthik-veda/img/hero-silk.jpg">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Swasthik Veda Weavers Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Mulish:wght@400;600;700&display=swap">
+<style>
+/* Layout: sticky brand header, photo hero, maroon promise band, product grid with colour pickers, wholesale band, contact footer. Single brand look (cream, maroon, gold). */
+:root {
+  --maroon: #7A1424; --maroon-dark: #560D19; --gold: #E2B254; --gold-text: #8A5F12;
+  --cream: #FBF5E8; --sand: #F4E7CC; --ink: #2E1416; --muted: #6B5148; --line: #E4CF9F; --on-maroon: #FFF6E0;
+  --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --body: Mulish, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--cream); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--cream); }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--gold-text); outline-offset: 2px; }
+.wrap { max-width: 1280px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; }
+.display { font-family: var(--display); font-weight: 600; color: var(--maroon); margin: 0; }
+
+.notice { background: var(--ink); color: #FFFFFF; font-size: 13px; text-align: center; }
+.notice .wrap { padding-block: 8px; }
+.ship { background: var(--maroon); color: var(--on-maroon); font-size: 13px; letter-spacing: .04em; text-align: center; }
+.ship .wrap { padding-block: 9px; }
+
+header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--cream); border-bottom: 1px solid var(--line); }
+.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; padding-block: 10px 6px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; line-height: 1; }
+.brand img { width: 52px; height: 52px; display: block; }
+.brand b { display: block; font-family: var(--display); font-size: clamp(22px, 5.5vw, 32px); color: var(--maroon); }
+.brand small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .26em; margin-top: 5px; }
+.icons { display: flex; }
+.icon-btn { position: relative; width: 44px; height: 44px; border: 0; background: transparent; color: var(--ink); cursor: pointer; display: grid; place-items: center; border-radius: 22px; }
+.icon-btn:hover { background: var(--sand); }
+.count { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--maroon); color: var(--on-maroon); font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; }
+nav.main { flex: 1 1 100%; display: flex; gap: 26px; justify-content: safe center; overflow-x: auto; white-space: nowrap; font-weight: 600; font-size: 15px; padding-block: 6px 8px; scrollbar-width: none; }
+nav.main a { text-decoration: none; padding-block: 6px; }
+nav.main a:hover { color: var(--maroon); }
+
+.hero .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 28px 48px; }
+.slider { position: relative; border-bottom: 1px solid var(--line); }
+.track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.track::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+.hero .wrap { padding-block: 32px 24px; }
+.hero h2.h1 { font-size: clamp(38px, 5.4vw, 66px); line-height: 1.05; }
+.offer { background: var(--maroon); color: var(--on-maroon); }
+.offer .eyebrow { color: var(--gold); }
+.offer p { color: var(--on-maroon); }
+.offer .big { font-family: var(--display); font-weight: 700; font-size: clamp(56px, 9vw, 112px); line-height: .95; color: var(--gold); margin: 0; }
+.offer .big span { font-size: 1.25em; }
+.btn.gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.btn.gold:hover { background: #F0C66E; }
+.tc { font-size: 12px; opacity: .85; }
+.controls { display: flex; align-items: center; justify-content: center; gap: 6px; padding-block: 4px 16px; }
+.arrow { width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: var(--cream); color: var(--ink); cursor: pointer; display: grid; place-items: center; }
+.arrow:hover { background: var(--sand); }
+.dots { display: flex; }
+.dots button { width: 32px; height: 44px; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.dots button::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--line); transition: width .2s; }
+.dots button[aria-current="true"]::before { width: 22px; border-radius: 5px; background: var(--maroon); }
+
+.hero-text { flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .22em; color: var(--gold-text); }
+.hero h1 { font-size: clamp(38px, 5.4vw, 66px); line-height: 1.05; }
+.hero p { margin: 0; font-size: 18px; color: var(--muted); max-width: 34em; }
+.hero-img { flex: 1 1 400px; min-width: 0; }
+.hero-img img { display: block; width: 100%; height: clamp(280px, 48vw, 520px); object-fit: cover; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px; font: inherit; font-weight: 700; font-size: 15px; letter-spacing: .03em; text-decoration: none; cursor: pointer; border: 1.5px solid var(--maroon); }
+.btn.solid { background: var(--maroon); color: var(--on-maroon); }
+.btn.solid:hover { background: var(--maroon-dark); }
+.btn.line { background: transparent; color: var(--maroon); }
+.btn.line:hover { background: var(--sand); }
+
+.promise { background: var(--maroon); border-block: 3px solid var(--gold); }
+.promise .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 28px 16px; padding-block: 36px; }
+.promise div.item { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.ring { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--gold); display: grid; place-items: center; }
+.promise span { font-family: var(--display); font-weight: 700; font-size: clamp(20px, 2.4vw, 24px); color: var(--on-maroon); }
+
+.trust { background: var(--sand); border-bottom: 1px solid var(--line); }
+.trust .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px; padding-block: 26px; }
+.trust .t { display: flex; gap: 14px; align-items: flex-start; }
+.trust strong { display: block; }
+.trust small { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+section.block .wrap { padding-block: 64px 24px; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px 16px; margin-bottom: 28px; }
+.sec-head h2 { font-size: clamp(32px, 4vw, 44px); }
+.sec-head p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.sec-head a { font-weight: 700; font-size: 15px; }
+
+.cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 28px; }
+.col { text-decoration: none; display: flex; flex-direction: column; gap: 12px; }
+.col img { width: 100%; height: 320px; object-fit: cover; display: block; transition: transform .4s ease; }
+.col .ph { overflow: hidden; }
+.col:hover img { transform: scale(1.04); }
+.col .soon { height: 320px; background: var(--sand); border: 1px dashed var(--gold-text); display: grid; place-items: center; color: var(--muted); font-size: 14px; }
+.col b { font-family: var(--display); font-size: 26px; }
+.col small { display: block; color: var(--muted); font-size: 14px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 40px 28px; }
+.card { display: flex; flex-direction: column; gap: 10px; }
+.card .ph { position: relative; height: 420px; background: var(--sand); overflow: hidden; }
+.card .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tag { position: absolute; top: 12px; left: 12px; background: var(--maroon); color: var(--on-maroon); font-size: 12px; font-weight: 700; letter-spacing: .08em; padding: 5px 10px; }
+.wish { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--cream); color: var(--ink); cursor: pointer; display: grid; place-items: center; }
+.wish[aria-pressed="true"] { color: var(--maroon); }
+.wish[aria-pressed="true"] path { fill: var(--maroon); }
+.weave { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--gold-text); }
+.card h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; }
+.colour-label { font-size: 13px; color: var(--muted); }
+.colour-label strong { color: var(--ink); }
+.swatches { display: flex; flex-wrap: wrap; margin-left: -6px; }
+.sw { width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.sw span { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(0,0,0,.25); outline: 2px solid transparent; outline-offset: 2px; }
+.sw[aria-pressed="true"] span { outline-color: var(--maroon); }
+.price { display: flex; align-items: baseline; gap: 10px; }
+.price b { font-size: 19px; }
+.price small { color: var(--muted); font-size: 13px; }
+
+.wholesale { background: var(--maroon); color: var(--on-maroon); margin-top: 48px; }
+.wholesale .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 32px 40px; padding-block: 56px; }
+.wholesale img { flex: 1 1 360px; min-width: 0; width: 100%; height: clamp(220px, 36vw, 360px); object-fit: cover; display: block; }
+.wholesale .txt { flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.wholesale h2 { color: var(--on-maroon); font-size: clamp(32px, 4vw, 44px); line-height: 1.1; }
+.wholesale p { margin: 0; font-size: 17px; }
+.phones { display: flex; flex-wrap: wrap; gap: 12px; }
+.phone { display: flex; flex-direction: column; padding: 12px 18px; border: 1.5px solid var(--gold); text-decoration: none; min-width: 170px; }
+.phone small { font-size: 12px; letter-spacing: .12em; color: var(--gold); font-weight: 700; }
+.phone b { font-size: 20px; letter-spacing: .04em; user-select: all; }
+
+footer { background: var(--sand); border-top: 1px solid var(--line); }
+.foot { display: flex; flex-wrap: wrap; gap: 36px; padding-block: 48px 28px; }
+.foot .about { flex: 2 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot .about b.name { font-family: var(--display); font-size: 30px; color: var(--maroon); }
+.foot .about i { font-family: var(--display); font-size: 20px; }
+address { font-style: normal; font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 26em; }
+.foot nav { flex: 1 1 150px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.foot nav span { font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.foot nav a { text-decoration: none; padding-block: 4px; }
+form.news { display: flex; flex-direction: column; gap: 8px; max-width: 380px; }
+form.news label { font-weight: 700; font-size: 14px; }
+form.news .row { display: flex; gap: 8px; }
+form.news input { flex: 1 1 auto; min-width: 0; height: 48px; padding: 0 12px; border: 1px solid var(--muted); background: var(--cream); font: inherit; color: var(--ink); }
+form.news .msg { font-size: 14px; color: var(--maroon); font-weight: 700; min-height: 1.5em; margin: 0; }
+.legal { border-top: 1px solid var(--line); }
+.legal .wrap.credits { display: block; font-size: 12px; padding-block: 0 24px; margin-top: -16px; }
+.legal .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-block: 18px 28px; font-size: 13px; color: var(--muted); }
+
+.scrim { position: fixed; inset: 0; background: rgba(46,20,22,.45); z-index: 50; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--cream); z-index: 60; display: flex; flex-direction: column; box-shadow: -8px 0 30px rgba(0,0,0,.18); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 12px 14px 20px; border-bottom: 1px solid var(--line); }
+.drawer-head h2 { font-size: 30px; }
+.drawer-body { flex: 1 1 auto; overflow-y: auto; padding: 8px 20px; }
+.empty { text-align: center; padding: 48px 8px; color: var(--muted); display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.line-item { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.line-item img { width: 76px; height: 96px; object-fit: cover; display: block; }
+.line-item b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.line-item small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+.li-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.qty { display: flex; align-items: center; border: 1px solid var(--line); }
+.qty button { width: 40px; height: 40px; border: 0; background: transparent; font: inherit; font-size: 18px; cursor: pointer; color: var(--ink); }
+.qty span { min-width: 28px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.remove { border: 0; background: transparent; color: var(--muted); text-decoration: underline; font: inherit; font-size: 13px; cursor: pointer; min-height: 40px; }
+.li-price { font-weight: 700; font-variant-numeric: tabular-nums; }
+.drawer-foot { border-top: 1px solid var(--line); padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 8px; background: var(--sand); }
+.drawer-foot[hidden] { display: none; }
+.sum { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.sum.offer-line { color: var(--maroon); font-weight: 700; }
+.sum.total { font-size: 19px; font-weight: 700; border-top: 1px solid var(--line); padding-top: 8px; }
+.drawer-foot small { color: var(--muted); font-size: 12px; }
+.sums { display: flex; flex-direction: column; gap: 8px; }
+.pin { display: flex; flex-direction: column; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.pin label { font-weight: 700; font-size: 14px; }
+.pin-row { display: flex; gap: 8px; }
+.pin input { flex: 1 1 auto; min-width: 0; height: 48px; padding: 0 12px; border: 1px solid var(--muted); background: var(--cream); font: inherit; font-size: 16px; letter-spacing: .12em; color: var(--ink); }
+.pin-msg { margin: 0; font-size: 14px; min-height: 1.4em; }
+.pin-msg.ok { color: var(--ink); }
+.pin-msg.ok b { color: var(--maroon); }
+.pin-msg.err { color: #A3142B; font-weight: 600; }
+.ship-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; }
+.util { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.util button { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 6px; border: 0; background: transparent; color: var(--on-maroon); font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .02em; cursor: pointer; }
+.util button:hover { text-decoration: underline; }
+.util .sep { opacity: .6; }
+@media (max-width: 640px) { .ship-row { justify-content: center; text-align: center; } .util { margin: 0 auto; } }
+.welcome { background: var(--cream); border-bottom: 1px solid var(--line); }
+.welcome-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; padding-block: 22px; }
+.welcome-row > div { flex: 1 1 360px; min-width: 0; }
+.welcome-big { margin: 0; font-family: var(--display); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--maroon); }
+.welcome-big span { color: var(--gold-text); }
+.welcome-row p + p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+.dlg { width: min(440px, calc(100% - 24px)); max-height: calc(100% - 24px); padding: 0; border: 0; background: var(--cream); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.3); overflow-y: auto; }
+.dlg::backdrop { background: rgba(46,20,22,.5); }
+.dlg-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 8px 12px 20px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--cream); }
+.dlg-head h2 { font-size: 28px; }
+.dlg .stack { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 22px; }
+.dlg .stack p { margin: 0; }
+.dlg label { font-weight: 700; font-size: 14px; margin-top: 4px; }
+.dlg input { height: 48px; padding: 0 12px; border: 1px solid var(--muted); background: #FFFFFF; font: inherit; font-size: 16px; color: var(--ink); width: 100%; min-width: 0; }
+.phone-in { display: flex; }
+.phone-in span { display: grid; place-items: center; padding: 0 10px; border: 1px solid var(--muted); border-right: 0; background: var(--sand); font-weight: 700; }
+.tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+.tabs button { min-height: 48px; border: 0; background: transparent; font: inherit; font-weight: 700; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; }
+.tabs button[aria-selected="true"] { color: var(--maroon); border-bottom-color: var(--maroon); }
+.form-msg { font-size: 14px; min-height: 1.2em; color: #A3142B; font-weight: 600; }
+.perk { background: var(--sand); padding: 10px 12px; font-size: 14px; }
+.linkish { border: 0; background: transparent; color: var(--maroon); text-decoration: underline; font: inherit; font-size: 14px; cursor: pointer; min-height: 40px; }
+.hint, .muted { color: var(--muted); font-size: 13px; }
+.code-card { border: 2px dashed var(--gold-text); background: #FFFFFF; padding: 14px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
+.code-card b.code { font-size: 26px; letter-spacing: .14em; color: var(--maroon); user-select: all; }
+.code-card.used, .code-card.expired { opacity: .6; }
+.status { display: inline-block; align-self: center; font-size: 12px; font-weight: 700; letter-spacing: .08em; padding: 3px 10px; background: var(--maroon); color: var(--on-maroon); }
+.status.off { background: var(--muted); }
+.phones.dark .phone { border-color: var(--maroon); }
+.phones.dark .phone small { color: var(--maroon); }
+.timeline { list-style: none; margin: 0; padding: 0 20px 22px; display: flex; flex-direction: column; gap: 0; }
+.timeline li { position: relative; padding: 0 0 16px 26px; border-left: 2px solid var(--line); margin-left: 7px; }
+.timeline li::before { content: ""; position: absolute; left: -9px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--line); border: 2px solid var(--cream); }
+.timeline li.done::before { background: var(--maroon); }
+.timeline li.done { border-left-color: var(--maroon); }
+.timeline li:last-child { border-left-color: transparent; }
+.timeline b { display: block; font-size: 15px; }
+.timeline small { color: var(--muted); font-size: 13px; }
+.sel { user-select: all; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: #FFFFFF; padding: 12px 20px; font-size: 14px; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 70; max-width: calc(100% - 32px); text-align: center; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { .col img, .toast { transition: none; } }
+</style>
+</head>
+<body>
+
+
+<div class="notice"><div class="wrap">Preview of the Swasthik Veda online store. Prices and policies shown are samples.</div></div>
+<div class="ship"><div class="wrap ship-row"><span>Shipping across India · Worldwide shipping coming soon</span>
+  <nav class="util" aria-label="Orders and help"><button type="button" data-open="track-dlg"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>Track Orders</button><span class="sep" aria-hidden="true">|</span><button type="button" data-open="support-dlg"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 13v-1a7 7 0 0 1 14 0v1"/><rect x="3.5" y="12.5" width="4" height="6" rx="1.5"/><rect x="16.5" y="12.5" width="4" height="6" rx="1.5"/><path d="M18.5 18.5c0 1.5-2 2.5-5 2.5"/></svg>Customer Support</button></nav></div></div>
+
+<header>
+  <div class="wrap head">
+    <a class="brand" href="#top">
+      <img src="img/logo-seal.png" alt="">
+      <span><b>Swasthik Veda</b><small>WEAVERS COLLECTION</small></span>
+    </a>
+    <div class="icons">
+      <button class="icon-btn" type="button" id="account-btn" data-open="account-dlg" aria-label="Sign in or create account"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.3-3.8 4.2-5.5 7.5-5.5s6.2 1.7 7.5 5.5"/></svg><span class="count" id="account-dot" hidden></span></button>
+      <button class="icon-btn" type="button" aria-label="Search" data-toast="Search is coming soon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <button class="icon-btn" type="button" id="wishlist-btn" aria-label="Wishlist, 0 items"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="count" id="wish-count" hidden>0</span></button>
+      <button class="icon-btn" type="button" id="bag-btn" aria-label="Shopping bag, 0 items"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="count" id="bag-count" hidden>0</span></button>
+    </div>
+    <nav class="main" aria-label="Main">
+      <a href="#new">New arrivals</a>
+      <a href="#collections">Kanjivaram</a>
+      <a href="#collections">Banarasi</a>
+      <a href="#new">All sarees</a>
+      <a href="#wholesale">Wholesale</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="slider" aria-roledescription="carousel" aria-label="Offers and highlights">
+    <div class="track" id="track">
+      <div class="slide hero" role="group" aria-roledescription="slide" aria-label="1 of 3">
+        <div class="wrap">
+          <div class="hero-text">
+            <span class="eyebrow">THREADS OF TRADITION · WEAVES OF GRACE</span>
+            <h1 class="display">Sarees straight from the weaver, for every celebration</h1>
+            <p>Premium quality weaves and the latest collections from Swasthik Veda in Bengaluru, at weaver prices. Buy one for yourself, or in bulk for your shop.</p>
+            <div class="ctas">
+              <a class="btn solid" href="#new">Shop silk sarees</a>
+              <a class="btn line" href="#wholesale">Wholesale enquiries</a>
+            </div>
+          </div>
+          <div class="hero-img"><img src="img/hero-silk.jpg" alt="Mustard and red ikat silk sarees with a string of pearls draped across them"></div>
+        </div>
+      </div>
+      <div class="slide hero offer" role="group" aria-roledescription="slide" aria-label="2 of 3">
+        <div class="wrap">
+          <div class="hero-text">
+            <span class="eyebrow">NEW YEAR SALE</span>
+            <p class="big"><span>27%</span> OFF</p>
+            <p>On silk sarees this New Year. Kanjivaram, Banarasi and soft silk, in every colour.</p>
+            <div class="ctas"><a class="btn gold" href="#new">Shop the sale</a></div>
+            <small class="tc">*T&amp;C apply. Offer valid for a limited period.</small>
+          </div>
+          <div class="hero-img"><img src="img/a1.jpg" alt="Ivory Banarasi silk saree with a kumkum red zari border" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="slide hero" role="group" aria-roledescription="slide" aria-label="3 of 3">
+        <div class="wrap">
+          <div class="hero-text">
+            <span class="eyebrow">FOR BOUTIQUES AND RESELLERS</span>
+            <h2 class="display h1">Wholesale prices on bulk orders</h2>
+            <p>Stock your shop with the latest weaves straight from our looms. Call Sai or Venkat for today's bulk rates.</p>
+            <div class="ctas"><a class="btn solid" href="#wholesale">Get wholesale rates</a></div>
+          </div>
+          <div class="hero-img"><img src="img/p5.jpg" alt="Stacked rolls of jacquard silk in many colours" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+    <div class="controls wrap">
+      <button class="arrow" type="button" id="prev" aria-label="Previous slide"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="dots" id="dots">
+        <button type="button" aria-label="Show slide 1" aria-current="true"></button>
+        <button type="button" aria-label="Show slide 2"></button>
+        <button type="button" aria-label="Show slide 3"></button>
+      </div>
+      <button class="arrow" type="button" id="pause" aria-label="Pause slideshow"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect id="pi1" x="6" y="5" width="4" height="14"/><rect id="pi2" x="14" y="5" width="4" height="14"/></svg></button>
+      <button class="arrow" type="button" id="next" aria-label="Next slide"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </section>
+
+  <section class="promise" aria-label="Our promise">
+    <div class="wrap">
+      <div class="item"><div class="ring"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#E2B254" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16M15 4l-3 16"/></svg></div><span>Premium Quality</span></div>
+      <div class="item"><div class="ring"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#E2B254" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div><span>Wholesale Supplier</span></div>
+      <div class="item"><div class="ring"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#E2B254" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><span>Trusted Business</span></div>
+      <div class="item"><div class="ring"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#E2B254" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></div><span>Best Prices</span></div>
+    </div>
+  </section>
+
+  <section class="welcome" aria-label="First order offer">
+    <div class="wrap welcome-row">
+      <div><p class="welcome-big">New here? <span>10% off</span> your first order</p>
+      <p>Create an account and we'll send a one-time code to your phone and email. Use it within 3 days.*</p></div>
+      <button class="btn solid" type="button" data-open="account-dlg" data-tab="signup">Create account</button>
+    </div>
+  </section>
+
+  <section class="trust" aria-label="Why shop with us">
+    <div class="wrap">
+      <div class="t"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7A1424" stroke-width="1.5" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><strong>Secure payment</strong><small>UPI, cards and net banking</small></div></div>
+      <div class="t"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7A1424" stroke-width="1.5" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><strong>Shipping across India</strong><small>Tracked delivery to your door</small></div></div>
+      <div class="t"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7A1424" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/></svg><div><strong>Easy returns</strong><small>On unworn sarees with tags</small></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="collections">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="display">Shop by weave</h2><a href="#new">View all sarees</a></div>
+      <div class="cols">
+        <a class="col" href="#new"><div class="ph"><img src="img/a3.jpg" alt="Turmeric yellow silk saree with a leaf green zari border" loading="lazy"></div><div><b>Dharmavaram silk</b><small>Rich zari pallus from Andhra</small></div></a>
+        <a class="col" href="#new"><div class="ph"><img src="img/mangalagiri.jpg" alt="Mangalagiri sarees with zari borders on a shop counter" loading="lazy"></div><div><b>Mangalagiri cotton</b><small>Light cotton with zari borders</small></div></a>
+        <a class="col" href="#new"><div class="ph"><img src="img/hero-silk.jpg" alt="Mustard and red Pochampally ikat silk" loading="lazy"></div><div><b>Pochampally silk</b><small>Ikat patterns from Telangana</small></div></a>
+        <a class="col" href="#new"><div class="ph"><img src="img/p6.jpg" alt="Folded silk sarees with gold zari borders on a shelf" loading="lazy"></div><div><b>Kanjivaram silk</b><small>Heavy zari, temple borders</small></div></a>
+        <a class="col" href="#new"><div class="ph"><img src="img/a2.jpg" alt="Peacock teal Banarasi silk with a brinjal border" loading="lazy"></div><div><b>Banarasi silk</b><small>Gold buta and brocade</small></div></a>
+        <a class="col" href="#new"><div class="ph"><img src="img/mysore.jpg" alt="Red Mysore silk saree with a gold paisley zari border" loading="lazy"></div><div><b>Mysore silk</b><small>Light crepe, everyday elegance</small></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="new">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 class="display">New this week</h2><p>Tap a colour to see each saree in it</p></div><a href="#new">Shop all 50+ sarees</a></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="wholesale" id="wholesale">
+    <div class="wrap">
+      <img src="img/p5.jpg" alt="Stacked rolls of jacquard silk in many colours" loading="lazy">
+      <div class="txt">
+        <h2 class="display">Buying for your shop?</h2>
+        <p>Swasthik Veda is a trusted wholesale supplier of quality weaves at the best prices. Call us for bulk rates and the latest collections.</p>
+        <div class="phones">
+          <a class="phone" href="tel:+918555063040"><small>SAI</small><b>85550 63040</b></a>
+          <a class="phone" href="tel:+917989077958"><small>VENKAT</small><b>79890 77958</b></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="about">
+      <img src="img/logo-seal.png" alt="Swasthik Veda Weavers Collection" width="120" height="120" style="width: 120px; height: 120px">
+      <i>Threads of tradition. Weaves of grace.</i>
+      <address>#13, Sri Vari Nilaya, Murali Layout, Aduru, near HP Petrol Bunk, Bidarahalli Hobli, Virgonagar Post, Bangalore 560049, Karnataka<br>swasthikvedasilks@gmail.com<br>Sai: 85550 63040 · Venkat: 79890 77958</address>
+      <form class="news" id="news" novalidate>
+        <label for="news-email">Get new arrivals by email</label>
+        <div class="row"><input id="news-email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn solid" type="submit">Sign up</button></div>
+        <p class="msg" id="news-msg" aria-live="polite"></p>
+      </form>
+    </div>
+    <nav aria-label="Shop"><span>SHOP</span><a href="#collections">Dharmavaram silk</a><a href="#collections">Mangalagiri cotton</a><a href="#collections">Pochampally silk</a><a href="#collections">Kanjivaram silk</a><a href="#collections">Banarasi silk</a><a href="#collections">Mysore silk</a><a href="#wholesale">Wholesale</a></nav>
+    <nav aria-label="Help"><span>HELP</span><a href="#top" data-toast="Shipping details coming soon">Shipping</a><a href="#top" data-toast="Returns details coming soon">Returns and exchanges</a><a href="#wholesale">Contact us</a></nav>
+  </div>
+  <div class="legal"><div class="wrap"><span>© 2026 Swasthik Veda Weavers Collection. All prices in INR.</span><span>Sri Chowdeshwary Devi Prasanna</span></div><div class="wrap credits">Photos: Mangalagiri sarees by Durgarao Vuddanti (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>), Mysore silk saree by Kiranravikumar (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>), via Wikimedia Commons.</div></div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+  <div class="drawer-head">
+    <h2 class="display" id="cart-title">Your bag</h2>
+    <button class="icon-btn" type="button" id="cart-close" aria-label="Close bag"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="drawer-body" id="cart-body"></div>
+  <div class="drawer-foot" id="cart-foot" hidden>
+    <form class="pin" id="pin-form" novalidate>
+      <label for="pin-input">Delivery pincode</label>
+      <div class="pin-row"><input id="pin-input" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="e.g. 560049"><button class="btn line" type="submit">Check</button></div>
+      <p class="pin-msg" id="pin-msg" aria-live="polite"></p>
+    </form>
+    <form class="pin" id="code-form" novalidate>
+      <label for="code-input">Discount code <span class="muted">(one per order)</span></label>
+      <div class="pin-row"><input id="code-input" autocomplete="off" placeholder="e.g. SVNEW7K2Q" style="text-transform: uppercase"><button class="btn line" type="submit">Apply</button></div>
+      <p class="pin-msg" id="code-msg" aria-live="polite"></p>
+    </form>
+    <div id="cart-sums" class="sums"></div>
+  </div>
+</aside>
+
+<dialog class="dlg" id="account-dlg" aria-labelledby="acc-title">
+  <div class="dlg-head"><h2 class="display" id="acc-title">Your account</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div id="acc-out">
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-signin" aria-selected="true" aria-controls="signin-form">Sign in</button>
+      <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="signup-form">Create account</button>
+    </div>
+    <form class="stack" id="signin-form" role="tabpanel" aria-labelledby="tab-signin" novalidate>
+      <label for="si-id">Phone number or email</label><input id="si-id" autocomplete="username">
+      <label for="si-pw">Password</label><input id="si-pw" type="password" autocomplete="current-password">
+      <p class="form-msg" id="si-msg" aria-live="polite"></p>
+      <button class="btn solid" type="submit">Sign in</button>
+      <button class="linkish" type="button" id="si-forgot">Forgot password?</button>
+    </form>
+    <form class="stack" id="signup-form" role="tabpanel" aria-labelledby="tab-signup" novalidate hidden>
+      <p class="perk">Get <b>10% off your first order</b> with a one-time code sent to your phone and email. Valid for 3 days.*</p>
+      <label for="su-name">Full name</label><input id="su-name" autocomplete="name">
+      <label for="su-phone">Mobile number</label><div class="phone-in"><span>+91</span><input id="su-phone" inputmode="numeric" maxlength="10" autocomplete="tel-national"></div>
+      <label for="su-email">Email</label><input id="su-email" type="email" autocomplete="email">
+      <label for="su-pw">Create password</label><input id="su-pw" type="password" autocomplete="new-password" placeholder="At least 6 characters">
+      <p class="form-msg" id="su-msg" aria-live="polite"></p>
+      <button class="btn solid" type="submit">Create account</button>
+    </form>
+  </div>
+  <div id="acc-in" hidden></div>
+</dialog>
+
+<dialog class="dlg" id="track-dlg" aria-labelledby="track-title">
+  <div class="dlg-head"><h2 class="display" id="track-title">Track your order</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <form class="stack" id="track-form" novalidate>
+    <label for="tr-id">Order number</label><input id="tr-id" placeholder="e.g. SV1001" autocomplete="off">
+    <label for="tr-phone">Mobile number used for the order</label><div class="phone-in"><span>+91</span><input id="tr-phone" inputmode="numeric" maxlength="10"></div>
+    <p class="form-msg" id="tr-msg" aria-live="polite"></p>
+    <button class="btn solid" type="submit">Track order</button>
+    <small class="hint">Preview: try order SV1001 with any 10-digit number to see a sample.</small>
+  </form>
+  <div id="tr-result"></div>
+</dialog>
+
+<dialog class="dlg" id="support-dlg" aria-labelledby="sup-title">
+  <div class="dlg-head"><h2 class="display" id="sup-title">Customer support</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="stack">
+    <p>We're happy to help with orders, returns, sizes and wholesale enquiries.</p>
+    <div class="phones dark">
+      <a class="phone" href="tel:+918555063040"><small>SAI</small><b>85550 63040</b></a>
+      <a class="phone" href="tel:+917989077958"><small>VENKAT</small><b>79890 77958</b></a>
+    </div>
+    <p><b>Email:</b> <span class="sel">swasthikvedasilks@gmail.com</span></p>
+    <p><b>Hours:</b> Monday to Saturday, 10 AM to 7 PM (sample hours)</p>
+    <p class="muted">#13, Sri Vari Nilaya, Murali Layout, Aduru, Bidarahalli Hobli, Virgonagar Post, Bangalore 560049</p>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var products = [
+    { weave: 'SOFT SILK', name: 'Jacquard soft silk, assorted festive colours', price: '₹6,450', tag: 'NEW', img: 'img/p1.jpg', alt: 'Rolls of jacquard silk in purple, pink, orange, blue and green' },
+    { weave: 'BANARASI', name: 'Georgette with gold zari buta, teal blue', price: '₹9,200', img: 'img/p2.jpg', alt: 'Teal blue Banarasi saree with gold zari buta' },
+    { weave: 'BANARASI', name: 'Banarasi silk with contrast zari border', price: '₹14,500', tag: 'BESTSELLER', alt: 'Banarasi silk saree with a wide contrast zari border', colors: [
+      { name: 'Peach + Maroon', hex: '#F4A582', img: 'img/p3.jpg' },
+      { name: 'Ivory + Kumkum Red', hex: '#F3E9D2', img: 'img/a1.jpg' },
+      { name: 'Peacock Teal + Brinjal', hex: '#0F6B6E', img: 'img/a2.jpg' },
+      { name: 'Turmeric + Leaf Green', hex: '#F2B51C', img: 'img/a3.jpg' },
+      { name: 'Blush + Wine', hex: '#F2B8C0', img: 'img/a4.jpg' },
+      { name: 'Powder Blue + Navy', hex: '#A9CFEA', img: 'img/a5.jpg' },
+      { name: 'Lilac + Plum', hex: '#C9A6E3', img: 'img/a6.jpg' } ] },
+    { weave: 'BANARASI', name: 'Georgette with gold zari buta', price: '₹9,200', alt: 'Banarasi georgette saree with gold zari buta', colors: [
+      { name: 'Emerald Green', hex: '#1D5E3A', img: 'img/b1.jpg' },
+      { name: 'Kumkum Maroon', hex: '#7E1A2C', img: 'img/b2.jpg' },
+      { name: 'Rani Pink', hex: '#B5156B', img: 'img/b3.jpg' },
+      { name: 'Aubergine', hex: '#4F1D4F', img: 'img/b4.jpg' },
+      { name: 'Turmeric Mustard', hex: '#C08A1A', img: 'img/b5.jpg' },
+      { name: 'Dusty Rose', hex: '#A85A6A', img: 'img/b6.jpg' } ] },
+    { weave: 'JACQUARD SILK', name: 'Paisley jacquard silk, choose your colour', price: '₹7,800', img: 'img/p5.jpg', alt: 'Stacked rolls of paisley jacquard silk in many colours' },
+    { weave: 'KANJIVARAM', name: 'Pure silk with zari border, assorted colours', price: '₹18,900', tag: 'NEW', img: 'img/p6.jpg', alt: 'Folded silk sarees with gold zari borders on a shelf' }
+  ];
+  var heart = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+  var grid = document.getElementById('grid');
+  var cart = [], wish = 0, toastTimer, lastFocus = null;
+  var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+  var OFFER = 0.27, pin = '', zone = null, applied = null, WELCOME_PCT = 0.10, CODE_DAYS = 3;
+  // Sample shipping zones from the Bengaluru warehouse (560049). Replace with real courier rates.
+  var ZONES = [
+    { name: 'Bengaluru', test: /^56[0-2]/, cost: 49, min: 1, max: 2 },
+    { name: 'Rest of Karnataka', test: /^5(6[3-9]|[7-9])/, cost: 79, min: 2, max: 3 },
+    { name: 'North-East, J&K and islands', test: /^(1[89]|7[89]|744)/, cost: 199, min: 6, max: 10 },
+    { name: 'South India', test: /^(5[0-5]|6)/, cost: 99, min: 3, max: 5 },
+    { name: 'Metro city', test: /^(11|40|41[01]|70|38[0-2])/, cost: 129, min: 3, max: 5 },
+    { name: 'Rest of India', test: /^[1-8]/, cost: 149, min: 4, max: 7 }
+  ];
+  function addWorkDays(d, n) { var x = new Date(d); while (n > 0) { x.setDate(x.getDate() + 1); if (x.getDay() !== 0) n--; } return x; }
+  function fmt(d) { return d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }); }
+  function lookup(code) {
+    if (!/^[1-8][0-9]{5}$/.test(code)) return null;
+    for (var i = 0; i < ZONES.length; i++) if (ZONES[i].test.test(code)) {
+      var z = ZONES[i], now = new Date();
+      return { name: z.name, cost: z.cost, dates: fmt(addWorkDays(now, z.min)) + ' – ' + fmt(addWorkDays(now, z.max)) };
+    }
+    return null;
+  }
+  function applyPin(code, quiet) {
+    var msg = document.getElementById('pin-msg'), z = lookup(code);
+    if (!z) { zone = null; pin = ''; if (!quiet) { msg.className = 'pin-msg err'; msg.textContent = 'Enter a valid 6-digit Indian pincode, like 560049.'; } renderCart(); return; }
+    zone = z; pin = code;
+    msg.className = 'pin-msg ok';
+    msg.innerHTML = '<b>' + esc(z.name) + '</b>: shipping ' + inr(z.cost) + ', delivery by ' + esc(z.dates) + '.';
+    try { localStorage.setItem('sv-pin', code); } catch (e) {}
+    renderCart();
+  }
+  function toNum(p) { return +p.replace(/[^0-9]/g, ''); }
+  function inr(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function renderCart() {
+    var count = cart.reduce(function (n, x) { return n + x.qty; }, 0);
+    setCount('bag-count', 'bag-btn', count, 'Shopping bag');
+    var body = document.getElementById('cart-body'), foot = document.getElementById('cart-foot');
+    if (!cart.length) {
+      body.innerHTML = '<div class="empty"><p>Your bag is empty.</p><button class="btn solid" type="button" data-act="shop">Browse sarees</button></div>';
+      foot.hidden = true; return;
+    }
+    body.innerHTML = cart.map(function (x, i) {
+      return '<div class="line-item"><img src="' + x.img + '" alt=""><div><b>' + esc(x.name) + '</b>' + (x.colour ? '<small>Colour: ' + esc(x.colour) + '</small>' : '') +
+        '<div class="li-row"><div class="qty"><button type="button" data-act="dec" data-i="' + i + '" aria-label="One less">−</button><span aria-label="Quantity">' + x.qty + '</span><button type="button" data-act="inc" data-i="' + i + '" aria-label="One more">+</button></div>' +
+        '<span class="li-price">' + inr(x.price * x.qty) + '</span></div><button class="remove" type="button" data-act="rm" data-i="' + i + '">Remove</button></div></div>';
+    }).join('');
+    var sub = cart.reduce(function (n, x) { return n + x.price * x.qty; }, 0), off = sub * OFFER;
+    foot.hidden = false;
+    var after = sub - off, codeOff = applied ? after * WELCOME_PCT : 0;
+    var ship = zone ? zone.cost : null, total = after - codeOff + (ship || 0);
+    document.getElementById('cart-sums').innerHTML = '<div class="sum"><span>Subtotal (' + count + (count === 1 ? ' saree' : ' sarees') + ')</span><span>' + inr(sub) + '</span></div>' +
+      '<div class="sum offer-line"><span>New Year offer, 27% off*</span><span>−' + inr(off) + '</span></div>' +
+      (applied ? '<div class="sum offer-line"><span>Code ' + esc(applied) + ', 10% off</span><span>−' + inr(codeOff) + '</span></div>' : '') +
+      '<div class="sum"><span>Shipping' + (zone ? ' to ' + pin : '') + '</span><span>' + (zone ? inr(ship) : 'Enter pincode') + '</span></div>' +
+      (zone ? '<div class="sum"><span>Delivery</span><span>' + zone.dates + '</span></div>' : '') +
+      '<div class="sum total"><span>Total</span><span>' + inr(total) + '</span></div>' +
+      '<button class="btn solid" type="button" data-act="checkout">Checkout</button>' +
+      '<small>*T&amp;C apply. The welcome code applies after the sale price. Prices include GST. Sample prices, shipping charges and delivery times for this preview.</small>';
+  }
+  function openCart() { lastFocus = document.activeElement; scrim.hidden = false; drawer.hidden = false; document.body.style.overflow = 'hidden'; document.getElementById('cart-close').focus(); }
+  function closeCart() { scrim.hidden = true; drawer.hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+  function setCount(id, btnId, n, label) {
+    var c = document.getElementById(id); c.textContent = n; c.hidden = n === 0;
+    document.getElementById(btnId).setAttribute('aria-label', label + ', ' + n + (n === 1 ? ' item' : ' items'));
+  }
+
+  products.forEach(function (p, i) {
+    var card = document.createElement('article'); card.className = 'card';
+    var first = p.colors ? p.colors[0] : null;
+    var html = '<div class="ph"><img id="img-' + i + '" src="' + (first ? first.img : p.img) + '" alt="' + p.alt + (first ? ', ' + first.name : '') + '" loading="lazy">' +
+      (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
+      '<button class="wish" type="button" aria-pressed="false" aria-label="Add ' + p.name + ' to wishlist">' + heart + '</button></div>' +
+      '<div class="weave">' + p.weave + '</div>';
+    if (p.colors) {
+      html += '<div class="colour-label">Colour: <strong id="cname-' + i + '">' + first.name + '</strong> · ' + p.colors.length + ' colours</div><div class="swatches" role="group" aria-label="Choose a colour">';
+      p.colors.forEach(function (c, j) {
+        html += '<button class="sw" type="button" data-p="' + i + '" data-c="' + j + '" aria-pressed="' + (j === 0) + '" aria-label="Colour: ' + c.name + '" title="' + c.name + '"><span style="background:' + c.hex + '"></span></button>';
+      });
+      html += '</div>';
+    }
+    html += '<h3>' + p.name + '</h3><div class="price"><b>' + p.price + '</b><small>incl. GST</small></div>' +
+      '<button class="btn line add" type="button" data-p="' + i + '">Add to bag</button>';
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+
+  grid.addEventListener('click', function (e) {
+    var sw = e.target.closest('.sw');
+    if (sw) {
+      var p = products[+sw.dataset.p], c = p.colors[+sw.dataset.c];
+      var img = document.getElementById('img-' + sw.dataset.p);
+      img.src = c.img; img.alt = p.alt + ', ' + c.name;
+      document.getElementById('cname-' + sw.dataset.p).textContent = c.name;
+      sw.parentNode.querySelectorAll('.sw').forEach(function (b) { b.setAttribute('aria-pressed', String(b === sw)); });
+      return;
+    }
+    var w = e.target.closest('.wish');
+    if (w) {
+      var on = w.getAttribute('aria-pressed') !== 'true';
+      w.setAttribute('aria-pressed', String(on)); wish += on ? 1 : -1;
+      setCount('wish-count', 'wishlist-btn', wish, 'Wishlist');
+      toast(on ? 'Added to wishlist' : 'Removed from wishlist');
+      return;
+    }
+    var a = e.target.closest('.add');
+    if (a) {
+      var idx = +a.dataset.p, pr = products[idx], nameEl = document.getElementById('cname-' + idx);
+      var colour = nameEl ? nameEl.textContent : '', key = idx + '|' + colour;
+      var found = cart.find(function (x) { return x.key === key; });
+      if (found) found.qty += 1;
+      else cart.push({ key: key, name: pr.name, colour: colour, price: toNum(pr.price), img: document.getElementById('img-' + idx).getAttribute('src'), qty: 1 });
+      renderCart();
+      toast('Added to bag: ' + pr.name + (colour ? ' (' + colour + ')' : ''));
+    }
+  });
+
+  document.getElementById('bag-btn').addEventListener('click', openCart);
+  document.getElementById('cart-close').addEventListener('click', closeCart);
+  document.getElementById('scrim').addEventListener('click', closeCart);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !drawer.hidden) closeCart(); });
+  drawer.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    if (b.dataset.act === 'shop') { closeCart(); location.hash = 'new'; return; }
+    if (b.dataset.act === 'checkout') { checkout(); return; }
+    var item = cart[+b.dataset.i]; if (!item) return;
+    if (b.dataset.act === 'inc') item.qty += 1;
+    if (b.dataset.act === 'dec') item.qty -= 1;
+    if (b.dataset.act === 'rm' || item.qty < 1) cart.splice(+b.dataset.i, 1);
+    renderCart();
+  });
+  document.getElementById('pin-form').addEventListener('submit', function (e) { e.preventDefault(); applyPin(document.getElementById('pin-input').value.trim()); });
+  document.getElementById('pin-input').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 6); if (e.target.value.length === 6) applyPin(e.target.value); });
+
+  /* ---------- Accounts and welcome codes (preview: stored only in this browser) ---------- */
+  function load(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  var accounts = load('sv-accounts', []), userKey = load('sv-user', null);
+  function me() { return accounts.find(function (a) { return a.phone === userKey; }) || null; }
+  function hash(t) { var h = 0; for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) | 0; return String(h); }
+  function newCode() { var c = 'SVNEW', abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; for (var i = 0; i < 4; i++) c += abc[Math.floor(Math.random() * abc.length)]; return c; }
+  function codeState(a) { if (!a || !a.code) return 'none'; if (a.code.used) return 'used'; if (Date.now() > a.code.expires) return 'expired'; return 'active'; }
+  function when(t) { return new Date(t).toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); }
+  function mask(ph) { return '+91 ' + ph.slice(0, 2) + 'XXXXXX' + ph.slice(8); }
+  function maskMail(m) { var p = m.split('@'); return p[0].slice(0, 2) + '***@' + p[1]; }
+
+  function openDlg(id) { var d = document.getElementById(id); if (d && !d.open) { if (d.showModal) d.showModal(); else d.setAttribute('open', ''); } }
+  function closeDlg(d) { if (d.close) d.close(); else d.removeAttribute('open'); }
+  document.querySelectorAll('[data-open]').forEach(function (b) {
+    b.addEventListener('click', function () { if (b.dataset.tab) showTab(b.dataset.tab); renderAccount(); openDlg(b.dataset.open); });
+  });
+  document.querySelectorAll('.dlg').forEach(function (d) {
+    d.addEventListener('click', function (e) { if (e.target === d || e.target.closest('[data-close]')) closeDlg(d); });
+  });
+
+  function showTab(t) {
+    var up = t === 'signup';
+    document.getElementById('tab-signin').setAttribute('aria-selected', String(!up));
+    document.getElementById('tab-signup').setAttribute('aria-selected', String(up));
+    document.getElementById('signin-form').hidden = up;
+    document.getElementById('signup-form').hidden = !up;
+  }
+  document.getElementById('tab-signin').addEventListener('click', function () { showTab('signin'); });
+  document.getElementById('tab-signup').addEventListener('click', function () { showTab('signup'); });
+  document.getElementById('si-forgot').addEventListener('click', function () { document.getElementById('si-msg').textContent = 'Password reset by SMS or email opens when the store launches.'; });
+
+  function codeCard(a, fresh) {
+    var st = codeState(a);
+    if (st === 'none') return '';
+    var label = { active: 'ACTIVE', used: 'USED', expired: 'EXPIRED' }[st];
+    return '<div class="code-card ' + st + '">' + (fresh ? '<p>Your welcome code was sent to <b>' + mask(a.phone) + '</b> and <b>' + esc(maskMail(a.email)) + '</b>.</p>' : '<p>Your first-order code</p>') +
+      '<b class="code">' + a.code.value + '</b><span class="status' + (st === 'active' ? '' : ' off') + '">' + label + '</span>' +
+      '<small class="muted">10% off your first order · one-time use · ' + (st === 'expired' ? 'expired ' : 'valid till ') + when(a.code.expires) + '</small>' +
+      (st === 'active' ? '<button class="btn line" type="button" id="copy-code">Copy code</button>' : '') + '</div>';
+  }
+  function renderAccount(fresh) {
+    var a = me(), out = document.getElementById('acc-out'), inn = document.getElementById('acc-in'), dot = document.getElementById('account-dot');
+    var btn = document.getElementById('account-btn');
+    out.hidden = !!a; inn.hidden = !a;
+    dot.hidden = !a; dot.textContent = a ? a.name.trim().charAt(0).toUpperCase() : '';
+    btn.setAttribute('aria-label', a ? 'Your account, signed in as ' + a.name : 'Sign in or create account');
+    if (!a) return;
+    inn.innerHTML = '<div class="stack"><p>Hi <b>' + esc(a.name.split(' ')[0]) + '</b>, you are signed in with ' + mask(a.phone) + '.</p>' + codeCard(a, fresh) +
+      (fresh ? '<p class="hint">Preview: the live store sends this code by SMS and email. Here it is shown on screen so you can try it in the bag.</p>' : '') +
+      '<button class="btn solid" type="button" id="go-shop">Start shopping</button><button class="linkish" type="button" id="sign-out">Sign out</button></div>';
+    var cp = document.getElementById('copy-code');
+    if (cp) cp.addEventListener('click', function () {
+      var v = a.code.value;
+      if (navigator.clipboard) navigator.clipboard.writeText(v).then(function () { toast('Code copied'); }, function () { toast('Copy failed. The code is ' + v); });
+      else toast('The code is ' + v);
+    });
+    document.getElementById('go-shop').addEventListener('click', function () { closeDlg(document.getElementById('account-dlg')); location.hash = 'new'; });
+    document.getElementById('sign-out').addEventListener('click', function () {
+      userKey = null; save('sv-user', null);
+      if (applied) { applied = null; document.getElementById('code-msg').textContent = ''; renderCart(); }
+      renderAccount(); toast('Signed out');
+    });
+  }
+
+  document.getElementById('signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('su-name').value.trim(), phone = document.getElementById('su-phone').value.replace(/\D/g, ''),
+        email = document.getElementById('su-email').value.trim().toLowerCase(), pw = document.getElementById('su-pw').value, msg = document.getElementById('su-msg');
+    if (name.length < 2) { msg.textContent = 'Please enter your name.'; return; }
+    if (!/^[6-9][0-9]{9}$/.test(phone)) { msg.textContent = 'Enter a 10-digit Indian mobile number.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter a valid email address.'; return; }
+    if (pw.length < 6) { msg.textContent = 'Use at least 6 characters for your password.'; return; }
+    if (accounts.some(function (a) { return a.phone === phone || a.email === email; })) { msg.textContent = 'This number or email already has an account. Please sign in.'; return; }
+    var now = Date.now();
+    var acct = { name: name, phone: phone, email: email, pw: hash(pw), code: { value: newCode(), issued: now, expires: now + CODE_DAYS * 864e5, used: false } };
+    accounts.push(acct); save('sv-accounts', accounts);
+    userKey = phone; save('sv-user', phone);
+    msg.textContent = ''; e.target.reset();
+    renderAccount(true);
+    toast('Account created. Your welcome code is on its way.');
+  });
+  document.getElementById('signin-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = document.getElementById('si-id').value.trim().toLowerCase().replace(/^\+?91/, ''), pw = document.getElementById('si-pw').value, msg = document.getElementById('si-msg');
+    var a = accounts.find(function (x) { return x.email === id || x.phone === id.replace(/\D/g, ''); });
+    if (!a || a.pw !== hash(pw)) { msg.textContent = 'That number, email or password doesn\'t match an account.'; return; }
+    msg.textContent = ''; e.target.reset();
+    userKey = a.phone; save('sv-user', a.phone);
+    renderAccount(); toast('Welcome back, ' + a.name.split(' ')[0]);
+  });
+
+  /* ---------- Discount code in the bag: one code per order ---------- */
+  document.getElementById('code-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var inp = document.getElementById('code-input'), v = inp.value.trim().toUpperCase(), msg = document.getElementById('code-msg'), a = me();
+    function err(t) { msg.className = 'pin-msg err'; msg.textContent = t; }
+    if (!v) return err('Enter a discount code.');
+    if (applied === v) return err('This code is already applied.');
+    var owner = accounts.find(function (x) { return x.code && x.code.value === v; });
+    if (!owner) return err('This code isn\'t valid. Check it and try again.');
+    if (!a) return err('Sign in with the account this code was sent to.');
+    if (owner !== a) return err('This code belongs to a different account.');
+    var st = codeState(a);
+    if (st === 'used') return err('This code has already been used. Welcome codes work once.');
+    if (st === 'expired') return err('This code expired on ' + when(a.code.expires) + '.');
+    var prev = applied; applied = v;
+    msg.className = 'pin-msg ok';
+    msg.innerHTML = '<b>' + v + '</b> applied: 10% off.' + (prev ? ' It replaced ' + esc(prev) + ', as only one code works per order.' : '');
+    inp.value = '';
+    renderCart();
+  });
+  function checkout() {
+    if (!applied) { toast('Checkout opens when the store launches'); return; }
+    var a = me();
+    if (a && a.code && a.code.value === applied) { a.code.used = true; save('sv-accounts', accounts); }
+    toast('Preview: code ' + applied + ' marked as used. Checkout opens when the store launches.');
+    applied = null; document.getElementById('code-msg').textContent = ''; renderCart();
+  }
+  renderAccount();
+
+  /* ---------- Track orders (preview sample) ---------- */
+  document.getElementById('tr-phone').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
+  document.getElementById('su-phone').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
+  document.getElementById('track-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = document.getElementById('tr-id').value.trim().toUpperCase(), ph = document.getElementById('tr-phone').value, msg = document.getElementById('tr-msg'), out = document.getElementById('tr-result');
+    out.innerHTML = '';
+    if (!/^SV\d{3,}$/.test(id)) { msg.textContent = 'Order numbers look like SV1001. You\'ll find yours in the confirmation SMS and email.'; return; }
+    if (!/^[6-9][0-9]{9}$/.test(ph)) { msg.textContent = 'Enter the 10-digit mobile number used for the order.'; return; }
+    if (id !== 'SV1001') { msg.textContent = 'We couldn\'t find order ' + id + ' for this number. Call us and we\'ll check.'; return; }
+    msg.textContent = '';
+    var d = function (n) { var x = new Date(); x.setDate(x.getDate() + n); return x.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }); };
+    var steps = [['Order placed', d(-3), 1], ['Packed at our Bengaluru store', d(-2), 1], ['Shipped with courier, AWB 7741 2290 118', d(-1), 1], ['Out for delivery', 'Expected ' + d(1), 0], ['Delivered', 'Expected by ' + d(1), 0]];
+    out.innerHTML = '<p style="padding: 0 20px 10px; margin: 0"><b>Order SV1001</b> · Banarasi silk, Peach + Maroon · sample order</p><ol class="timeline">' +
+      steps.map(function (x) { return '<li class="' + (x[2] ? 'done' : '') + '"><b>' + x[0] + '</b><small>' + x[1] + '</small></li>'; }).join('') + '</ol>';
+  });
+
+  renderCart();
+  try { var saved = localStorage.getItem('sv-pin'); if (saved) { document.getElementById('pin-input').value = saved; applyPin(saved, true); } } catch (e) {}
+  document.getElementById('wishlist-btn').addEventListener('click', function () {
+    toast(wish ? wish + ' saved to your wishlist' : 'Tap the heart on a saree to save it');
+  });
+  document.querySelectorAll('[data-toast]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); toast(el.dataset.toast); });
+  });
+
+  (function () {
+    var track = document.getElementById('track'), dots = document.querySelectorAll('#dots button');
+    var n = dots.length, cur = 0, timer = null, paused = false;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pauseBtn = document.getElementById('pause');
+    function go(i) { cur = (i + n) % n; track.scrollTo({ left: cur * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' }); mark(); }
+    function mark() { dots.forEach(function (d, j) { if (j === cur) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); }); }
+    function start() { stop(); if (!paused && !reduce) timer = setInterval(function () { go(cur + 1); }, 5000); }
+    function stop() { if (timer) clearInterval(timer); timer = null; }
+    function setPaused(p) {
+      paused = p; pauseBtn.setAttribute('aria-label', p ? 'Play slideshow' : 'Pause slideshow');
+      pauseBtn.querySelector('svg').innerHTML = p ? '<path d="M7 5l12 7-12 7z"/>' : '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>';
+      p ? stop() : start();
+    }
+    if (reduce) setPaused(true);
+    dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); start(); }); });
+    document.getElementById('prev').addEventListener('click', function () { go(cur - 1); start(); });
+    document.getElementById('next').addEventListener('click', function () { go(cur + 1); start(); });
+    pauseBtn.addEventListener('click', function () { setPaused(!paused); });
+    var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(function () { var i = Math.round(track.scrollLeft / track.clientWidth); if (i !== cur) { cur = i; mark(); } }, 80); }, { passive: true });
+    track.addEventListener('pointerdown', stop); track.addEventListener('touchstart', stop, { passive: true });
+    track.addEventListener('pointerup', start); track.addEventListener('touchend', start);
+    track.addEventListener('mouseenter', stop); track.addEventListener('mouseleave', start);
+    track.addEventListener('focusin', stop); track.addEventListener('focusout', start);
+    window.addEventListener('resize', function () { track.scrollTo({ left: cur * track.clientWidth }); });
+    start();
+  })();
+  document.getElementById('news').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = document.getElementById('news-email').value.trim(), m = document.getElementById('news-msg');
+    m.textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Thank you. Sign-up opens when the store launches.' : 'Please enter a valid email address, like name@example.com.';
+  });
+})();
+</script>
+
+</body>
+</html>
